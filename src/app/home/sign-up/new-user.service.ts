@@ -20,7 +20,4 @@ export class NewUserService {
     return this.http.post<User>(`${url}/person/register`, newUser)
   }
 
-  teste() {
-    return this.http.get('http://localhost:3000', {observe: 'response'})
-  }
 }

@@ -51,10 +51,4 @@ export class SignUpComponent implements OnInit {
       )
     }
   }
-
-  teste() {
-    this.newUserService.teste()
-    console.log(this.users)
-  }
-
 }

@@ -1,1 +1,22 @@
-<p>Eu sou o login</p>
+<form [formGroup]="signinForm" (submit)="login()">
+  <mat-form-field appearance="fill">
+    <mat-label>
+      E-mail
+    </mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>
+      Senha
+    </mat-label>
+    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-button color="primary">Login</button>
+
+</form>

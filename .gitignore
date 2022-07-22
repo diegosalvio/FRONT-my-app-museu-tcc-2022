@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Angular stuff
-/environments
+environments/
