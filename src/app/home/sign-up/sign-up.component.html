@@ -1,44 +1,44 @@
-
-<mat-card>
+<div class="content-wrapper">
   <form [formGroup]="newUserForm" (submit)="signUp()">
 
-    <mat-card-title>Sign Up</mat-card-title>
 
-      <mat-card-content>
-        <mat-form-field appearance="fill">
+    <div class="register-div">
+        <mat-label class="title-label">Registre-se!</mat-label>
+        <mat-form-field appearance="outline">
           <mat-label>Nome</mat-label>
-          <input matInput formControlName="name">
+          <input class="input-name" matInput formControlName="name">
           <mat-error *ngIf="newUserForm.get('name')?.errors?.['required']">Campo obrigatório</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Data de nascimento</mat-label>
           <input matInput formControlName="birthDate">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="outline" >
           <mat-label>Telefone</mat-label>
           <input matInput formControlName="phone">
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email">
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Senha</mat-label>
           <input matInput formControlName="password">
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
           <mat-label>Confirmar senha</mat-label>
           <input matInput formControlName="confirmPassword">
         </mat-form-field>
 
-      </mat-card-content>
+        <button mat-raised-button class="register-button" color="primary">Cadastrar</button>
 
-      <button mat-button color="primary">Cadastrar</button>
-
+        <br>
+        <a [routerLink]="['']">Já se cadastrou? Clique aqui!</a>
+      </div>
     </form>
-</mat-card>
+</div>

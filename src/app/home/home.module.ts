@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -31,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatGridListModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule
   ],
   exports: [HomeComponent]
 })
