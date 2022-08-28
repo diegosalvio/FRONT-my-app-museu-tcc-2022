@@ -1,22 +1,47 @@
-<form [formGroup]="signinForm" (submit)="login()">
-  <mat-form-field appearance="fill">
-    <mat-label>
-      E-mail
-    </mat-label>
-    <input matInput formControlName="email">
-  </mat-form-field>
+<div class="content-wrapper">
 
-  <mat-form-field appearance="fill">
-    <mat-label>
-      Senha
-    </mat-label>
-    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide">
-      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
+  <div class="div-img">
+    <img class="img-login"
+      src="http://museudoipiranga2022.org.br/wp-content/uploads/sites/377/elementor/thumbs/20210914_logo_museu_ipiranga-pd4e3eddzueg8x3fiybwdr3wwq26573z5ns9lhh1e6.jpg"
+      alt="logo do museu do Ipiranga">
+  </div>
 
-  <button mat-button color="primary">Login</button>
 
-</form>
+  <form class="form-login" [formGroup]="signinForm" (submit)="login()">
+    <mat-form-field class="form-field-email" appearance="outline">
+      <mat-label>
+        E-mail
+      </mat-label>
+      <input class="input-email" matInput formControlName="email">
+      <mat-error *ngIf="signinForm.get('email')?.errors?.['required']">Campo obrigatório</mat-error>
+      <mat-error *ngIf="signinForm.get('email')?.errors?.['email']">e-mail inválido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-pwd" appearance="outline">
+      <mat-label>
+        Senha
+      </mat-label>
+      <input class="input-pwd" matInput formControlName="password" [type]="hidePwd ? 'password' : 'text'">
+      <mat-error *ngIf="signinForm.get('password')?.errors?.['required']">Campo obrigatório</mat-error>
+      <button mat-icon-button matSuffix (click)="hidePwd = !hidePwd" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePwd">
+        <mat-icon>{{hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+
+    </mat-form-field>
+
+    <div class="form-button">
+      <button class="button-login" mat-raised-button color="primary">Login</button>
+    </div>
+
+    <button type="button" class="button-pwd" mat-flat-button>Esqueceu a senha?</button>
+
+    <mat-divider></mat-divider>
+
+    <button type="button" class="button-register" mat-raised-button [routerLink]="['signup']">Criar nova conta</button>
+  </form>
+
+  <div class="div-button">
+  </div>
+
+</div>

@@ -13,8 +13,12 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 @NgModule({
   declarations: [
@@ -31,8 +35,17 @@ import {MatIconModule} from '@angular/material/icon';
     MatGridListModule,
     ReactiveFormsModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaskModule.forRoot(),
+    MatSnackBarModule
+
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
+  providers: [
+    MatDatepickerModule
+  ]
 })
 export class HomeModule { }

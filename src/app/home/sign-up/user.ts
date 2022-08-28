@@ -7,6 +7,6 @@ export interface User {
 }
 
 export interface Login {
-  name: string;
+  email: string;
   password: string
 }
