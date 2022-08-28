@@ -13,14 +13,16 @@
         E-mail
       </mat-label>
       <input class="input-email" matInput formControlName="email">
+      <mat-error *ngIf="signinForm.get('email')?.errors?.['required']">Campo obrigatório</mat-error>
+      <mat-error *ngIf="signinForm.get('email')?.errors?.['email']">e-mail inválido</mat-error>
     </mat-form-field>
-
 
     <mat-form-field class="form-field-pwd" appearance="outline">
       <mat-label>
         Senha
       </mat-label>
       <input class="input-pwd" matInput formControlName="password" [type]="hidePwd ? 'password' : 'text'">
+      <mat-error *ngIf="signinForm.get('password')?.errors?.['required']">Campo obrigatório</mat-error>
       <button mat-icon-button matSuffix (click)="hidePwd = !hidePwd" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hidePwd">
         <mat-icon>{{hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>

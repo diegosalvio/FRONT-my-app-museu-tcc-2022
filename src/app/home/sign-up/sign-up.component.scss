@@ -9,6 +9,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+
+}
+
+mat-form-field {
+  width: 195px;
+  -ms-box-sizing:content-box;
+  -moz-box-sizing:content-box;
+  box-sizing:content-box;
+  -webkit-box-sizing:content-box;
 }
 
 .title-label {

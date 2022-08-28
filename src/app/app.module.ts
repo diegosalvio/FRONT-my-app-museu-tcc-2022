@@ -7,6 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { TokenInterceptorService } from './home/login/token-interceptor.service';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
 
 @NgModule({
   declarations: [
@@ -17,7 +24,8 @@ import { TokenInterceptorService } from './home/login/token-interceptor.service'
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    NgxMaskModule.forRoot(maskConfigFunction),
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

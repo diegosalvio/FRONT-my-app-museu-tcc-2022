@@ -3,42 +3,65 @@
 
 
     <div class="register-div">
-        <mat-label class="title-label">Registre-se!</mat-label>
-        <mat-form-field appearance="outline">
-          <mat-label>Nome</mat-label>
-          <input class="input-name" matInput formControlName="name">
-          <mat-error *ngIf="newUserForm.get('name')?.errors?.['required']">Campo obrigatório</mat-error>
-        </mat-form-field>
+      <mat-label class="title-label">Registre-se!</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input class="input-name" matInput formControlName="name">
+        <mat-error *ngIf="newUserForm.get('name')?.errors?.['required']">Campo obrigatório</mat-error>
+        <mat-error *ngIf="newUserForm.get('name')?.errors && newUserForm.get('name')?.errors?.['required']">Nome
+          inválido</mat-error>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Data de nascimento</mat-label>
-          <input matInput formControlName="birthDate">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Data de nascimento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" readonly />
+        <mat-error *ngIf="newUserForm.get('birthDate')?.errors?.['required']">Selecione uma data</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline" >
-          <mat-label>Telefone</mat-label>
-          <input matInput formControlName="phone">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Telefone</mat-label>
+        <input matInput formControlName="phone" mask="(00) 0 0000-0000" />
+        <mat-error *ngIf="newUserForm.get('phone')?.errors?.['required']">Campo obrigatório</mat-error>
+        <mat-error *ngIf="newUserForm.get('phone')?.errors && !newUserForm.get('phone')?.errors?.['required']">Telefone
+          inválido</mat-error>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>E-mail</mat-label>
-          <input matInput formControlName="email">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="newUserForm.get('email')?.errors?.['required']">Campo obrigatório</mat-error>
+        <mat-error *ngIf="newUserForm.get('email')?.errors?.['email']">e-mail inválido</mat-error>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Senha</mat-label>
-          <input matInput formControlName="password">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input matInput formControlName="password" [type]="hidePwd ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hidePwd = !hidePwd" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePwd">
+          <mat-icon>{{hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="newUserForm.get('password')?.errors?.['required']">Campo obrigatório</mat-error>
+        <mat-error *ngIf="newUserForm.get('password')?.errors && !newUserForm.get('password')?.errors?.['required']">
+          Senha inválida</mat-error>
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Confirmar senha</mat-label>
-          <input matInput formControlName="confirmPassword">
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirmar senha</mat-label>
+        <input matInput formControlName="confirmPassword" [type]="hidePwd ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hidePwd = !hidePwd" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidePwd">
+          <mat-icon>{{hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="newUserForm.get('password')?.value !== newUserForm.get('confirmPassword')?.value">As senhas
+          precisam ser iguais</mat-error>
+      </mat-form-field>
 
-        <button mat-raised-button class="register-button" color="primary">Cadastrar</button>
+      <button mat-raised-button class="register-button" color="primary">Cadastrar</button>
 
-        <br>
-        <a [routerLink]="['']">Já se cadastrou? Clique aqui!</a>
-      </div>
-    </form>
+      <br>
+      <a [routerLink]="['']">Já se cadastrou? Clique aqui!</a>
+    </div>
+  </form>
 </div>
