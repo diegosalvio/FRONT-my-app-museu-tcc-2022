@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SignUpComponent implements OnInit {
 
-
   newUserForm!: FormGroup
 
   users!: Array<User>

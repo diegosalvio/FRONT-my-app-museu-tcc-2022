@@ -1,0 +1,18 @@
+<div class="dialog-wrapper">
+  <h1 class="title" mat-dialog-title>
+    {{title}}
+  </h1>
+  <div mat-dialog-content>
+    <p>
+      {{body}}
+    </p>
+  </div>
+  <div class="dialog-content" mat-dialog-actions align="end">
+    <div class="btn-group">
+      <mat-button mat-button mat-dialog-close class="close-button">
+        Cancelar
+      </mat-button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Continuar?</button>
+    </div>
+  </div>
+</div>

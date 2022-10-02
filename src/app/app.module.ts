@@ -5,7 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { MatIconModule } from '@angular/material/icon';
+
+
+
 import { TokenInterceptorService } from './home/login/token-interceptor.service';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 
