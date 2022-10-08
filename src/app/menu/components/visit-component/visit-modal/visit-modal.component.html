@@ -1,0 +1,152 @@
+<!-- <mat-grid-list *ngIf="!canLoad;else loader" cols="1" rowHeight="100vw">
+  <mat-grid-tile>
+    <img src="https://cdn.culturagenial.com/imagens/abaporu-2-cke.jpg" alt="">
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>{{artifactModel[this.index].title}}</mat-card-title>
+      <mat-card-content>
+        <p>{{artifactModel[this.index].informationAbout}}</p>
+        <button mat-button (click)="nextOnTheList()">PROXIMO</button>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <button mat-button (click)="previousOnTheList()">APERTE AQUI</button>
+  </mat-grid-tile>
+</mat-grid-list> -->
+
+<!--
+<div class="wrapper">
+  <mat-card *ngIf="!canLoad;else loader">
+    <mat-card-header>
+      <mat-card-title>Obra</mat-card-title>
+    </mat-card-header>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{artifactModel[this.index].title}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <img mat-card-image [src]="imageTest">
+    </mat-expansion-panel>
+    <mat-card-content>
+      <p>{{artifactModel[this.index].informationAbout}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button (click)="previousOnTheList()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextOnTheList()">
+        <mat-icon>
+          arrow_forward_ios
+        </mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div> -->
+
+
+<!-- <div *ngIf="!canLoad;else loader">
+  <div class="div-img">
+    <img [src]="imageTest">
+  </div>
+
+  <div class="div-content">
+    <p>{{artifactModel[this.index].informationAbout}}</p>
+  </div>
+
+  <div class="div-actions">
+    <button mat-icon-button (click)="previousOnTheList()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <button mat-icon-button (click)="nextOnTheList()">
+      <mat-icon>
+        arrow_forward_ios
+      </mat-icon>
+    </button>
+  </div>
+
+</div>
+ -->
+
+
+<!-- <mat-card *ngIf="!canLoad;else loader">
+  <mat-card-header>
+    <mat-card-title>{{artifactModel[this.index].title}}</mat-card-title>
+  </mat-card-header>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Informações
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>{{artifactModel[this.index].informationAbout}}</p>
+    </mat-expansion-panel>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Imagem
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <img [src]="imageTest">
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-card-actions>
+    <button mat-icon-button (click)="previousOnTheList()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <button mat-icon-button (click)="nextOnTheList()">
+      <mat-icon>
+        arrow_forward_ios
+      </mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card> -->
+
+
+
+<div class="all-content">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{artifactModel[this.index].title}}</mat-card-title>
+      <mat-card-subtitle>Tarsila do Amaral</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="imageTest" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        {{artifactModel[this.index].informationAbout}}
+      </p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-icon-button (click)="previousOnTheList()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button mat-icon-button (click)="nextOnTheList()">
+        <mat-icon>
+          arrow_forward_ios
+        </mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon>
+          qr_code_scanner
+        </mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+<ng-template #loader>
+  <div class="div-loader">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -11,6 +11,9 @@ const API_URL = "http://localhost:3001/api/v1/museum"
 })
 export class MuseumService {
 
+  artifactModel: any
+  museumModel: any
+
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -18,6 +21,7 @@ export class MuseumService {
   getAllMuseums(): Observable<Museums> {
     const res = this.httpClient.get<Museums>(API_URL).pipe(
       map((resp => {
+        this.museumModel = resp
         return resp
       })),
       tap(resp => console.log("TAP: ", resp))
@@ -29,6 +33,9 @@ export class MuseumService {
 
   getAllArtifactsFromMuseum(idMuseum: string) {
     const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts`).pipe(
+      map((resp => {
+        this.artifactModel = resp
+      })),
       tap(resp => console.log("TAP0: ", resp)),
     )
     return res
@@ -36,6 +43,9 @@ export class MuseumService {
 
   getLevel3ArtifactsFromMuseum(idMuseum: string) {
     const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts3`).pipe(
+      map((resp => {
+        this.artifactModel = resp
+      })),
       tap(resp => console.log("TAP1: ", resp)),
     )
     return res
@@ -43,13 +53,11 @@ export class MuseumService {
 
   getLevel2ArtifactsFromMuseum(idMuseum: string) {
     const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts2`).pipe(
+      map((resp => {
+        this.artifactModel = resp
+      })),
       tap(resp => console.log("TAP2: ", resp)),
     )
     return res
   }
-/*
-  getAllArtistsFromMuseum() {
-
-  } */
-
 }

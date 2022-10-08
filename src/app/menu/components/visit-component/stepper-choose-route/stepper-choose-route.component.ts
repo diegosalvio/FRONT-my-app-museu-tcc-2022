@@ -1,14 +1,22 @@
-import { MuseumService } from './../../../services/museum.service';
+import { Router } from '@angular/router';
+import { MuseumService } from '../../../../services/museum.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pipe, tap, Observable, Subscription, map } from 'rxjs';
 import { Museum, Museums } from 'src/app/interfaces/museum';
 import { Artifact } from 'src/app/interfaces/artifact';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-stepper-choose-route',
   templateUrl: './stepper-choose-route.component.html',
-  styleUrls: ['./stepper-choose-route.component.scss']
+  styleUrls: ['./stepper-choose-route.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 export class StepperChooseRouteComponent implements OnInit {
 
@@ -38,7 +46,8 @@ export class StepperChooseRouteComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private museumService: MuseumService
+    private museumService: MuseumService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -78,6 +87,8 @@ export class StepperChooseRouteComponent implements OnInit {
       const choosenRoute = this.routesForm.value.route
 
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
+
+      this.router.navigate(['menu/visit-modal'])
     } else {
       console.log("Formulário Inválido")
     }

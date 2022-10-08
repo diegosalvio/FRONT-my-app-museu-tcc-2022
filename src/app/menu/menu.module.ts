@@ -10,12 +10,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { StepperChooseRouteComponent } from './components/stepper-choose-route/stepper-choose-route.component';
+import { StepperChooseRouteComponent } from './components/visit-component/stepper-choose-route/stepper-choose-route.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { VisitModalComponent } from './components/visit-component/visit-modal/visit-modal.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 
@@ -23,7 +29,8 @@ import {MatSelectModule} from '@angular/material/select';
   declarations: [
     MenuComponent,
     DialogComponent,
-    StepperChooseRouteComponent
+    StepperChooseRouteComponent,
+    VisitModalComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -37,7 +44,12 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatDividerModule
   ]
 })
 export class MenuModule { }
