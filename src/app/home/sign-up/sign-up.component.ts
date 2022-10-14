@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { User } from './user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,7 +22,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private newUserService: NewUserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private route: Router
   ) {
   }
 
@@ -61,6 +63,8 @@ export class SignUpComponent implements OnInit {
         {
           complete: () => {
             console.log("Usuário Cadastrado")
+            this.route.navigate([""])
+
           },
           error: (error) => {
             console.log("ERROR ADD NEW USER: ", error)

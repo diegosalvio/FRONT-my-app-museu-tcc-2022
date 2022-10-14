@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, pluck, tap } from 'rxjs';
 import { Artifact } from '../interfaces/artifact';
+import { Artist } from '../interfaces/artist';
 import { Museums } from '../interfaces/museum';
 
 const API_URL = "http://localhost:3001/api/v1/museum"
@@ -13,6 +14,7 @@ export class MuseumService {
 
   artifactModel: any
   museumModel: any
+  artistModel: any
 
   constructor(
     private httpClient: HttpClient
@@ -59,5 +61,15 @@ export class MuseumService {
       tap(resp => console.log("TAP2: ", resp)),
     )
     return res
+  }
+
+  getOneArtist(idArtist: string): Observable<Artist> {
+    return this.httpClient.get<Artist>(`${API_URL}/artist/${idArtist}`).pipe(
+      map((resp => {
+        this.artistModel = resp
+        return resp
+      })),
+      tap(resp => console.log("Artist Object: ", resp))
+    )
   }
 }
