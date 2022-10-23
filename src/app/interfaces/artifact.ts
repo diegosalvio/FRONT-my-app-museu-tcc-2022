@@ -6,4 +6,9 @@ export interface Artifact {
   importancyLevel: string
   artist: string
   museum: string
+  image: string
+  geolocation: {
+    lat: number,
+    lng: number
+  }
 }

@@ -4,14 +4,9 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menuMuseus="matMenu" class="btn-group">
-      <button mat-menu-item (click)="chooseMuseum()">
-        <span>
-          Iniciar visitação
-        </span>
-      </button>
-      <button mat-menu-item color="link">
-        <span>
-          Meu perfil
+      <button mat-menu-item>
+        <span [routerLink]="['']">
+          Início
         </span>
       </button>
       <button mat-menu-item color="accent">
@@ -19,11 +14,22 @@
           Mais informações
         </span>
       </button>
+      <button mat-menu-item class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+        <span>Sair</span>
+      </button>
     </mat-menu>
     <span>Minha Visita</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
-      <mat-icon>logout</mat-icon>
+    <button mat-icon-button matTooltip="Volte para sua visitação!" [routerLink]="['visit-modal']"
+      *ngIf="showReturnButton">
+      <mat-icon matTooltipPosition="below" matBadge="!" matBadgeColor="warn">
+        <!-- this.router.navigate(['menu/visit-modal']) -->
+        keyboard_return
+      </mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+      [routerLink]="['visit-modal/free-visitation']">
+      <mat-icon>account_circle</mat-icon>
     </button>
   </mat-toolbar>
 </p>

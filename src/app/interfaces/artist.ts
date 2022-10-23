@@ -3,5 +3,6 @@ export interface Artist {
   name: string,
   birthDate: string,
   informationAbout: string,
+  portrait: string,
   museum: string
 }

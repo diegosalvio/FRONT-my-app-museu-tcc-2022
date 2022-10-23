@@ -6,6 +6,7 @@ export interface DialogData {
   title: string
   body: string
   action: string
+  resp: boolean
 }
 
 @Component({

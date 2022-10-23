@@ -1,6 +1,7 @@
+import { Visitation } from './../interfaces/visitation';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, pluck, tap } from 'rxjs';
+import { map, Observable, pluck, tap, debounceTime } from 'rxjs';
 import { Artifact } from '../interfaces/artifact';
 import { Artist } from '../interfaces/artist';
 import { Museums } from '../interfaces/museum';
@@ -15,6 +16,9 @@ export class MuseumService {
   artifactModel: any
   museumModel: any
   artistModel: any
+  visitationModel: any
+  index!: number
+  showReturn: boolean = false
 
   constructor(
     private httpClient: HttpClient
@@ -43,26 +47,6 @@ export class MuseumService {
     return res
   }
 
-  getLevel3ArtifactsFromMuseum(idMuseum: string) {
-    const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts3`).pipe(
-      map((resp => {
-        this.artifactModel = resp
-      })),
-      tap(resp => console.log("TAP1: ", resp)),
-    )
-    return res
-  }
-
-  getLevel2ArtifactsFromMuseum(idMuseum: string) {
-    const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts2`).pipe(
-      map((resp => {
-        this.artifactModel = resp
-      })),
-      tap(resp => console.log("TAP2: ", resp)),
-    )
-    return res
-  }
-
   getOneArtist(idArtist: string): Observable<Artist> {
     return this.httpClient.get<Artist>(`${API_URL}/artist/${idArtist}`).pipe(
       map((resp => {
@@ -70,6 +54,21 @@ export class MuseumService {
         return resp
       })),
       tap(resp => console.log("Artist Object: ", resp))
+    )
+  }
+
+  getVisitation(idMuseum: string, type: string) {
+    return this.httpClient.get<Visitation>(`${API_URL}/visitation/${type}/${idMuseum}`).pipe(
+      map(resp => {
+        this.visitationModel = resp.typeVisit
+        this.artifactModel = resp.visitationList
+      }),
+    )
+  }
+
+  getOneArtifact(id: string): Observable<Artifact> {
+    return this.httpClient.get<Artifact>(`${API_URL}/artifact/${id}`).pipe(
+      tap(() => console.log)
     )
   }
 }

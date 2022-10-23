@@ -1,4 +1,3 @@
-import { AppModule } from './../app.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu.component';
@@ -22,15 +21,23 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FreeVisitationComponent } from './components/visit-component/visit-modal/free-visitation/free-visitation.component';
+import { DialogQrCodeComponent } from './components/visit-component/dialog-qr-code/dialog-qr-code.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { PortalPageComponent } from './components/portal-page/portal-page.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     DialogComponent,
     StepperChooseRouteComponent,
-    VisitModalComponent
+    VisitModalComponent,
+    FreeVisitationComponent,
+    DialogQrCodeComponent,
+    PortalPageComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -50,7 +57,9 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatCardModule,
     MatExpansionModule,
     MatDividerModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ZXingScannerModule,
+    MatBadgeModule
   ],
   exports: [
     MenuComponent

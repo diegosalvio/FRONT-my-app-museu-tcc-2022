@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { MuseumService } from '../../../../services/museum.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CheckboxControlValueAccessor, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pipe, tap, Observable, Subscription, map } from 'rxjs';
 import { Museum, Museums } from 'src/app/interfaces/museum';
 import { Artifact } from 'src/app/interfaces/artifact';
@@ -22,11 +22,11 @@ export class StepperChooseRouteComponent implements OnInit {
 
   routes = [{
     id: 1,
-    name: "Curto"
+    name: "Curta"
   },
   {
     id: 2,
-    name: "Longo"
+    name: "Longa"
   },
   {
     id: 3,
@@ -61,34 +61,23 @@ export class StepperChooseRouteComponent implements OnInit {
 
   getPersonalizedRoute(idMuseum: string, route: string) {
     console.log("ROUTE: ", route)
-    if (route == "1") {
-      this.museumService.getLevel3ArtifactsFromMuseum(idMuseum).subscribe(
-        (resp) => {
-          console.log("Obras nível 3: ", resp)
-        }
-      )
-    } else if (route == "2") {
-      this.museumService.getLevel2ArtifactsFromMuseum(idMuseum).subscribe(
-        (resp) => {
-          console.log("Obras nível 2:", resp)
-        })
-    } else {
-      this.museumService.getAllArtifactsFromMuseum(idMuseum).subscribe(
-        (resp) => {
-          console.log("Dentro do subscribe: ", resp)
-        }
-      )
-    }
+
+    this.museumService.getVisitation(idMuseum, route.toLowerCase()).subscribe(res => console.log(res))
   }
 
   doneMuseumRoute() {
-    if (this.museumForm.valid && this.routesForm.valid) {
-      const choosenMuseum = this.museumForm.value.museum
-      const choosenRoute = this.routesForm.value.route
+    const choosenMuseum = this.museumForm.value.museum
+    const choosenRoute = this.routesForm.value.route
+
+    if (this.museumForm.valid && this.routesForm.valid && this.routesForm.value.route !== "Livre") {
 
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
-
+      this.museumService.index = 0
       this.router.navigate(['menu/visit-modal'])
+    } else if (this.routesForm.value.route === "Livre") {
+      console.log("Caiu no else if?")
+      this.getPersonalizedRoute(choosenMuseum, choosenRoute)
+      this.router.navigate(["menu/visit-modal/free-visitation"])
     } else {
       console.log("Formulário Inválido")
     }

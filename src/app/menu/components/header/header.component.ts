@@ -1,24 +1,31 @@
-import { Component, ViewChild } from "@angular/core";
+import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatMenuTrigger } from "@angular/material/menu";
+import { throwToolbarMixedModesError } from "@angular/material/toolbar";
 import { Router } from "@angular/router";
 import { UserService } from "src/app/auth/user/user.service";
+import { MuseumService } from "src/app/services/museum.service";
 import { DialogComponent } from "../dialog/dialog.component";
+import { DialogQrCodeComponent } from "../visit-component/dialog-qr-code/dialog-qr-code.component";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.components.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger
+  canReturn: boolean = false
 
   constructor(
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog
-     ) {}
+    private dialog: MatDialog,
+    private museumService: MuseumService
+  ) { }
+  ngOnInit(): void {
+  }
 
   logout() {
     this.userService.logout();
@@ -28,22 +35,17 @@ export class HeaderComponent {
     console.log("SAINDO")
   }
 
-
-  openDialog(title: string, body: string, action: string) {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      restoreFocus: false,
-      data: {
-        title: title,
-        body: body,
-        action: action
-      }
-    },
-    )
-
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus())
-  }
-
   chooseMuseum() {
     this.router.navigate(['menu/choose-museum'])
   }
+
+  get showReturnButton() {
+    return this.museumService.index && this.museumService.showReturn ? this.canReturn = true : this.canReturn = false
+  }
+
+  openScanner() {
+
+
+  }
+
 }

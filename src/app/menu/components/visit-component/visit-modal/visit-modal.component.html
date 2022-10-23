@@ -1,25 +1,27 @@
-<script
-      src="url_maps"
-      defer
-    ></script>
 <div class="all-content">
   <mat-card class="example-card" *ngIf="!canLoad;else loader">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <!--  <div mat-card-avatar class="example-header-image"></div> -->
+      <img mat-card-avatar [src]="artistPortrait">
       <mat-card-title>{{artifactModel[this.index].title}}</mat-card-title>
       <mat-card-subtitle>{{ artistName }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="imageTest">
+    <img mat-card-image [src]="artifactModel[this.index].image">
     <mat-card-content>
       <p>
         {{artifactModel[this.index].informationAbout}}
       </p>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title>Mapa</mat-panel-title>
+          <mat-panel-title>
+            <mat-icon>map</mat-icon>Mapa
+          </mat-panel-title>
         </mat-expansion-panel-header>
         <div>
-          <google-map height="400px" width="750px"></google-map>
+          <google-map [center]="center" [zoom]="zoom">
+            <map-marker [position]="artifactModel[this.index].geolocation"></map-marker>
+            <map-circle [center]="center" [radius]="0.25"></map-circle>
+          </google-map>
         </div>
       </mat-expansion-panel>
     </mat-card-content>
@@ -33,11 +35,10 @@
           arrow_forward_ios
         </mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon>
-          qr_code_scanner
-        </mat-icon>
-      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+      [routerLink]="['free-visitation']">
+      <mat-icon>qr_code</mat-icon>
+    </button>
     </mat-card-actions>
   </mat-card>
 </div>
