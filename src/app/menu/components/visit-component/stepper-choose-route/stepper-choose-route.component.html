@@ -1,0 +1,51 @@
+<!-- <div class="example-input-wrapper">
+  <label for="duration">Animation duration:</label>
+  <input id="duration" value="2000" type="number" min="0" step="100" #duration>
+</div> -->
+
+<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'2000'">
+  <mat-step [stepControl]="museumForm" errorMessage="Campo obrigatório!">
+    <form [formGroup]="museumForm">
+      <ng-template matStepLabel>Escolha um Museu</ng-template>
+      <mat-form-field appearance="outline">
+        <mat-label>Lista de Museus</mat-label>
+        <mat-select [(value)]="initialMuseum" formControlName="museum" name="museum">
+          <mat-option *ngFor="let museum of museums$ | async" [value]="museum._id">
+            {{museum.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Campo obrigatório!</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext type="submit" [disabled]="errorsMuseumForms">Próximo</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="routesForm" errorMessage="Campo obrigatório!">
+    <form [formGroup]="routesForm">
+      <ng-template matStepLabel>Escolha um tipo de percurso</ng-template>
+      <mat-form-field appearance="outline">
+        <!-- <input matInput placeholder="Address" formControlName="secondCtrl" required> -->
+        <mat-label>Rotas</mat-label>
+        <mat-select [(value)]="initialRoute" formControlName="route" name="route">
+          <mat-option *ngFor="let route of routes" [value]="route.name">
+            {{route.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>Campo obrigatório!</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext (click)="routeForms" [disabled]="errorsRouteForms">Próximo</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Voltar</button>
+      <button mat-button (click)="doneMuseumRoute()">Começar</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

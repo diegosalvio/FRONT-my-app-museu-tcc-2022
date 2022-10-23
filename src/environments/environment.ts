@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL_BASE:"http://localhost:3000/api/v1"
+  URL_BASE:"http://localhost:3000/api/v1",
+  MAPS_KEY: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAiLjt5V4p9n8r1mNo137zvea2JPMcl0Xs"
 };
 
 /*

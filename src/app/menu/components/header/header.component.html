@@ -1,16 +1,40 @@
 <p>
-  <mat-toolbar>
-   <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-  <span>Minha Visita</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
-   <mat-icon>logout</mat-icon>
- </button>
-</mat-toolbar>
+  <mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menuMuseus" class="example-icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menuMuseus="matMenu" class="btn-group">
+      <button mat-menu-item>
+        <span [routerLink]="['']">
+          Início
+        </span>
+      </button>
+      <button mat-menu-item color="accent">
+        <span>
+          Mais informações
+        </span>
+      </button>
+      <button mat-menu-item class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+        <span>Sair</span>
+      </button>
+    </mat-menu>
+    <span>Minha Visita</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button matTooltip="Volte para sua visitação!" [routerLink]="['visit-modal']"
+      *ngIf="showReturnButton">
+      <mat-icon matTooltipPosition="below" matBadge="!" matBadgeColor="warn">
+        <!-- this.router.navigate(['menu/visit-modal']) -->
+        keyboard_return
+      </mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+      [routerLink]="['visit-modal/free-visitation']">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar>
 </p>
+
+
+<!-- (click)="openDialog('Visita Completa', 'A visita longa te dá a experiência completa da visitação!', 'close')"
+(click)="openDialog('Visita Rápida', 'A visita rápida passa pelos principais atrativos!', 'close')"
+(click)="openDialog('Visita Livre', 'Se você não gosta de um roteiro, essa opção é pra você!', 'close')" -->

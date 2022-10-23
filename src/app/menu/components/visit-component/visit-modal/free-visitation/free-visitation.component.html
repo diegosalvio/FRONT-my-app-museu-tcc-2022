@@ -1,0 +1,31 @@
+<div class="all-content" *ngIf="artifactModel$  | async; else loader">
+  <!-- <mat-card class="example-card" *ngIf="!canLoad;else loader"> -->
+  <mat-card class="example-card">
+    <mat-card-header>
+      <img mat-card-avatar [src]="(artistModel$ | async)?.portrait">
+      <mat-card-title>{{(artifactModel$ | async)?.title}}</mat-card-title>
+      <mat-card-subtitle>{{(artistModel$ | async)?.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="(artifactModel$ | async)?.image">
+    <mat-card-content>
+      <p>
+        {{(artifactModel$ | async)?.informationAbout}}
+      </p>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions>
+      <button mat-icon-button (click)="openScanner()">
+        <mat-icon>
+          qr_code_scanner
+        </mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+<ng-template #loader>
+  <div class="div-loader">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
