@@ -29,7 +29,7 @@ export class VisitModalComponent implements OnInit, OnDestroy {
   lat!: number
   lng!: number
   center!: google.maps.LatLngLiteral
-  zoom = 4500
+  zoom = 21
   position!: any
 
   constructor(

@@ -28,6 +28,7 @@ import { FreeVisitationComponent } from './components/visit-component/visit-moda
 import { DialogQrCodeComponent } from './components/visit-component/dialog-qr-code/dialog-qr-code.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { PortalPageComponent } from './components/portal-page/portal-page.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PortalPageComponent } from './components/portal-page/portal-page.compon
     VisitModalComponent,
     FreeVisitationComponent,
     DialogQrCodeComponent,
-    PortalPageComponent
+    PortalPageComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,

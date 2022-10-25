@@ -10,7 +10,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Lista de Museus</mat-label>
         <mat-select [(value)]="initialMuseum" formControlName="museum" name="museum">
-          <mat-option *ngFor="let museum of museums$ | async" [value]="museum._id">
+          <mat-option *ngFor="let museum of museums$ | async" [value]="museum">
             {{museum.name}}
           </mat-option>
         </mat-select>
@@ -42,7 +42,10 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+    <p>
+      Você selecionou o museu <strong>{{museumForm.get('museum')?.value.name}}</strong>, e o tipo de visitação
+      <strong>{{routesForm.get('route')?.getRawValue()}}</strong>.
+    </p>
     <div>
       <button mat-button matStepperPrevious>Voltar</button>
       <button mat-button (click)="doneMuseumRoute()">Começar</button>

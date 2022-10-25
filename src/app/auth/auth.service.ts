@@ -33,7 +33,6 @@ export class AuthService {
         tap(
           (res) => {
             const authToken = res.headers.get("x-access-token") ?? "";
-            console.log("AuthTOken: ", authToken)
             this.userService.savUserToken(authToken);
           }
         )

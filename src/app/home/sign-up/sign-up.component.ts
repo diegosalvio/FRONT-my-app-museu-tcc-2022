@@ -64,7 +64,6 @@ export class SignUpComponent implements OnInit {
           complete: () => {
             console.log("Usuário Cadastrado")
             this.route.navigate([""])
-
           },
           error: (error) => {
             console.log("ERROR ADD NEW USER: ", error)
