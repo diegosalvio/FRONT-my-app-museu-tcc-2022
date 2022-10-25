@@ -66,7 +66,7 @@ export class StepperChooseRouteComponent implements OnInit {
   }
 
   doneMuseumRoute() {
-    const choosenMuseum = this.museumForm.value.museum
+    const choosenMuseum = this.museumForm.value.museum._id
     const choosenRoute = this.routesForm.value.route
 
     if (this.museumForm.valid && this.routesForm.valid && this.routesForm.value.route !== "Livre") {

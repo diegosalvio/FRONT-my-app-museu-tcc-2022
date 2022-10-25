@@ -2,11 +2,13 @@
 <mat-dialog-content>
   <zxing-scanner (scanSuccess)="onCodeResult($event)" ></zxing-scanner>
   <ng-container *ngIf="qrResult">
-    QR-Code escaneado!
     {{qrResult}}
+  </ng-container>
+  <ng-container *ngIf="!qrResult">
+    Você poderá prosseguir depois de escanear um QR-Code
   </ng-container>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button [routerLink]="['menu/choose-museum']" mat-button mat-dialog-close>Cancelar</button>
-  <button *ngIf="qrResult" mat-button [mat-dialog-close]="qrResult" cdkFocusInitial>Alguma coisa</button>
+  <button *ngIf="qrResult" mat-button [mat-dialog-close]="qrResult" cdkFocusInitial>Ir para obra</button>
 </mat-dialog-actions>

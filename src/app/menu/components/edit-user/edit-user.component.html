@@ -1,0 +1,33 @@
+<form class="form-edit-user" [formGroup]="editUserForm">
+  <h1>Edição de dados</h1>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Digite seu nome" formControlName="name">
+      <!-- <input matInput [value]="(user$ | async)?.name" placeholder="Digite seu nome" formControlName="name"> -->
+      <mat-icon matSuffix (click)="editInput('name')">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input  matInput placeholder="TELEFONE DO CARA" formControlName="phone">
+      <mat-icon matSuffix (click)="editInput('phone')">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input  matInput placeholder="E-MAIL DO CARA" formControlName="email">
+      <mat-icon matSuffix (click)="editInput('email')">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <div class="button-wrapper">
+    <p>
+      <button mat-raised-button color="primary" (click)="updateUser()">SALVAR</button>
+    </p>
+    <p>
+      <button mat-raised-button color="warn" (click)="deleteUser()">EXCLUIR</button>
+    </p>
+  </div>
+</form>

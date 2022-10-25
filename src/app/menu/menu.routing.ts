@@ -1,3 +1,4 @@
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { PortalPageComponent } from './components/portal-page/portal-page.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -26,6 +27,10 @@ const routes: Routes = [
        {
         path: '',
         component: PortalPageComponent
+       },
+       {
+        path: 'edit-user',
+        component: EditUserComponent
        }
       ]
    }

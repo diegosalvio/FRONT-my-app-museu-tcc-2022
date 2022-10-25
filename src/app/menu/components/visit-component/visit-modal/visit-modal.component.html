@@ -27,18 +27,16 @@
     </mat-card-content>
     <mat-divider></mat-divider>
     <mat-card-actions>
-      <button mat-icon-button (click)="previousOnTheList()">
-        <mat-icon>arrow_back_ios</mat-icon>
+      <button mat-button (click)="previousOnTheList()">
+        VOLTAR
       </button>
-      <button mat-icon-button (click)="nextOnTheList()">
-        <mat-icon>
-          arrow_forward_ios
-        </mat-icon>
+      <button mat-button (click)="nextOnTheList()">
+        PRÓXIMO
       </button>
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
-      [routerLink]="['free-visitation']">
-      <mat-icon>qr_code</mat-icon>
-    </button>
+        [routerLink]="['free-visitation']">
+        <mat-icon>qr_code</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
