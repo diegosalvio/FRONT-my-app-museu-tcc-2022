@@ -1,0 +1,62 @@
+<form class="wrapper-forms" [formGroup]="artifactForm" (submit)="submitArtifact()">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Título da obra</mat-label>
+      <input matInput placeholder="digite o título da obra" formControlName="title">
+      <mat-error *ngIf="titleError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Data</mat-label>
+      <input matInput placeholder="digite a data da obra" formControlName="date" mask="0000">
+      <mat-error *ngIf="dateError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Informações</mat-label>
+      <input matInput placeholder="digite informações da obra" formControlName="informationAbout">
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Imagem</mat-label>
+      <input matInput placeholder="Insira a url da imagem da obra" formControlName="image">
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-label>Geolocalização da obra</mat-label>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Latitude da obra" formControlName="lat">
+      <mat-error *ngIf="latError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Longitude da obra" formControlName="lng">
+      <mat-error *ngIf="lngError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Artista</mat-label>
+      <input placeholder="Selecione o artista responsável" matInput formControlName="artist" [matAutocomplete]="auto">
+      <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)"  [displayWith]="displayProperty"> -->
+      <mat-error *ngIf="artistError">Campo inválido</mat-error>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)"
+        [displayWith]="displayProperty">
+        <mat-option *ngFor="let artist of artist$ | async" [value]="artist">
+          {{artist.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button>Cadastrar</button>
+  </p>
+</form>

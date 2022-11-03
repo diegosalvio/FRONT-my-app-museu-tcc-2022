@@ -1,0 +1,68 @@
+<form class="wrapper-forms" [formGroup]="editArtifactForm">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Lista de obras</mat-label>
+      <mat-select placeholder="Selecione uma obra" formControlName="id">
+        <mat-option *ngFor="let artifact of artifact$ | async" [value]="artifact._id">
+          {{artifact.title}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="titleError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button (click)="getArtifact()" [disabled]="idError">Selecionar obra<mat-icon>arrow_forward_ios</mat-icon></button>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Título da obra</mat-label>
+      <input matInput placeholder="digite o título da obra" formControlName="title">
+      <mat-icon matSuffix (click)="editInput('title')">edit</mat-icon>
+      <mat-error *ngIf="titleError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Data</mat-label>
+      <input matInput placeholder="digite a data da obra" formControlName="date" mask="0000">
+      <mat-icon matSuffix (click)="editInput('date')">edit</mat-icon>
+      <mat-error *ngIf="dateError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Informações</mat-label>
+      <input matInput placeholder="digite informações da obra" formControlName="informationAbout">
+      <mat-icon matSuffix (click)="editInput('informationAbout')">edit</mat-icon>
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Imagem</mat-label>
+      <input matInput placeholder="Insira a url da imagem da obra" formControlName="image">
+      <mat-icon matSuffix (click)="editInput('image')">edit</mat-icon>
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-label>Geolocalização da obra</mat-label>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Latitude da obra" formControlName="lat">
+      <mat-icon matSuffix (click)="editInput('lat')">edit</mat-icon>
+      <mat-error *ngIf="latError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <input matInput placeholder="Longitude da obra" formControlName="lng">
+      <mat-icon matSuffix (click)="editInput('lng')">edit</mat-icon>
+      <mat-error *ngIf="lngError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button [disabled]="disables" (click)="submitEditArtifact()">Editar</button>
+  </p>
+</form>

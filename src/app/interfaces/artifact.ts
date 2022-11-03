@@ -1,11 +1,11 @@
 export interface Artifact {
-  __id: string
+  _id?: string
   title: string
   date: string
   informationAbout: string
-  importancyLevel: string
-  artist: string
-  museum: string
+  importancyLevel?: string
+  artist?: string
+  museum?: string
   image: string
   geolocation: {
     lat: number,

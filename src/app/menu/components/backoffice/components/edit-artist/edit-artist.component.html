@@ -1,0 +1,54 @@
+<form class="wrapper-forms" [formGroup]="editArtistForm">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Lista de Artistas</mat-label>
+      <mat-select placeholder="Escolha um artista" formControlName="id">
+          <mat-option *ngFor="let artist of artist$ | async" [value]="artist._id">
+            {{artist.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </p>
+  <p>
+    <button mat-button (click)="getArtist()" [disabled]="idArtistError">
+      Selecionar
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Nome do Artista</mat-label>
+      <input matInput placeholder="digite o nome do artista" formControlName="name">
+      <mat-icon matSuffix (click)="editInput('name')">edit</mat-icon>
+      <mat-error *ngIf="nameError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Data de nascimento</mat-label>
+      <input matInput placeholder="digite a data de nascimento do artista" formControlName="birthDate"
+        mask="00/00/0000">
+        <mat-icon matSuffix (click)="editInput('birthDate')">edit</mat-icon>
+      <mat-error *ngIf="birthDateError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Informações biográficas</mat-label>
+      <input matInput placeholder="digite a data de nascimento do artista" formControlName="informationAbout">
+      <mat-icon matSuffix (click)="editInput('informationAbout')">edit</mat-icon>
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Retrato</mat-label>
+      <input matInput placeholder="Insira uma url com o retrato do artista" formControlName="portrait">
+      <mat-icon matSuffix (click)="editInput('portrait')">edit</mat-icon>
+      <mat-error *ngIf="portraitError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button (click)="submitEditedArtist()">Editar</button>
+  </p>
+</form>

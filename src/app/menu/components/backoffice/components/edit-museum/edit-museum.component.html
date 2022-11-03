@@ -1,0 +1,85 @@
+<form class="wrapper-forms" [formGroup]="editMuseumForm" (submit)="submitEditMuseum()">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Nome do Museu</mat-label>
+      <input matInput placeHolder="digite o nome do museu" formControlName="name">
+      <mat-icon matSuffix (click)="editInput('name')">edit</mat-icon>
+      <mat-error *ngIf="nameErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>CNPJ</mat-label>
+      <input matInput placeHolder="digite o CNPJ do museu" formControlName="CNPJ">
+      <mat-icon matSuffix (click)="editInput('CNPJ')">edit</mat-icon>
+      <mat-error *ngIf="cnpjErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Descrição</mat-label>
+      <input matInput placeHolder="digite o nome do museu" formControlName="description">
+      <mat-icon matSuffix (click)="editInput('description')">edit</mat-icon>
+      <mat-error *ngIf="descriptionErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>CEP</mat-label>
+      <input matInput placeHolder="Digite o CEP do museu" formControlName="CEP">
+      <mat-icon matSuffix (click)="editInput('CEP')">edit</mat-icon>
+      <mat-error *ngIf="cepErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Endereço</mat-label>
+      <input matInput placeHolder="Digite o endereço do museu" formControlName="address">
+      <mat-icon matSuffix (click)="editInput('address')">edit</mat-icon>
+      <mat-error *ngIf="addressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Número</mat-label>
+      <input matInput placeHolder="Digite o número do museu" formControlName="numberAddress">
+      <mat-icon matSuffix (click)="editInput('numberAddress')">edit</mat-icon>
+      <mat-error *ngIf="numberAddressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Complemento (opcional)</mat-label>
+      <input matInput placeHolder="Digite o complemento" formControlName="complementAddress">
+      <mat-icon matSuffix (click)="editInput('complementAddress')">edit</mat-icon>
+      <mat-error *ngIf="complementAddressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Bairro</mat-label>
+      <input matInput placeHolder="Digite o bairro do museu" formControlName="districtAddress">
+      <mat-icon matSuffix (click)="editInput('districtAddress')">edit</mat-icon>
+      <mat-error *ngIf="districtAddressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Cidade</mat-label>
+      <input matInput placeHolder="Digite a cidade do museu" formControlName="cityAddress">
+      <mat-icon matSuffix (click)="editInput('cityAddress')">edit</mat-icon>
+      <mat-error *ngIf="cityAddressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Estado</mat-label>
+      <input matInput placeHolder="Digite o estado do museu" formControlName="stateAddress">
+      <mat-icon matSuffix (click)="editInput('stateAddress')">edit</mat-icon>
+      <mat-error *ngIf="stateAddressErrors">Preencha corretamente</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button>Editar</button>
+  </p>
+</form>

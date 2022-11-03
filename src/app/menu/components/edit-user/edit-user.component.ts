@@ -40,16 +40,12 @@ export class EditUserComponent implements OnInit {
 
   getUser() {
     try {
-      try {
-        this.userService.returnUser().subscribe(res => this.idUser = res.id)
-        this.userService.getUser(this.idUser).subscribe((res) => {
-          this.editUserForm.get("name")?.patchValue(res.name)
-          this.editUserForm.get("phone")?.patchValue(res.phone)
-          this.editUserForm.get("email")?.patchValue(res.email)
-        })
-      } catch (error) {
-        console.log(error)
-      }
+      this.userService.returnUser().subscribe(res => this.idUser = res.id)
+      this.userService.getUser(this.idUser).subscribe((res) => {
+        this.editUserForm.get("name")?.patchValue(res.name)
+        this.editUserForm.get("phone")?.patchValue(res.phone)
+        this.editUserForm.get("email")?.patchValue(res.email)
+      })
     } catch (error) {
       console.log(error)
     }

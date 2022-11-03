@@ -1,3 +1,4 @@
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { PortalPageComponent } from './components/portal-page/portal-page.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,10 @@ const routes: Routes = [
     component: MenuComponent,
     children: [
       {
+        path: '',
+        component: PortalPageComponent
+       },
+      {
         path: 'choose-museum',
         component: StepperChooseRouteComponent
        },
@@ -25,12 +30,12 @@ const routes: Routes = [
         component: FreeVisitationComponent
        },
        {
-        path: '',
-        component: PortalPageComponent
-       },
-       {
         path: 'edit-user',
         component: EditUserComponent
+       },
+       {
+        path: 'backoffice',
+        component: BackofficeComponent
        }
       ]
    }
