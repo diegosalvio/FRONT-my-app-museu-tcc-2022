@@ -1,4 +1,4 @@
-<form class="wrapper-forms" [formGroup]="editMuseumForm" (submit)="submitEditMuseum()">
+<form class="wrapper-forms" [formGroup]="editMuseumForm">
   <p>
     <mat-form-field appearance="standard">
       <mat-label>Nome do Museu</mat-label>
@@ -80,6 +80,9 @@
     </mat-form-field>
   </p>
   <p>
-    <button mat-button>Editar</button>
+    <button mat-button [disabled]="!disables" (click)="submitEditMuseum()">Editar</button>
+  </p>
+  <p>
+    <button class="delete-button" mat-button (click)="deleteMuseum()">Deletar</button>
   </p>
 </form>

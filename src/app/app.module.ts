@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 import { TokenInterceptorService } from './home/login/token-interceptor.service';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -21,7 +21,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,5 @@
+import { DialogComponent } from './../../../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -17,11 +19,14 @@ export class EditMuseumComponent implements OnInit {
 
   editMuseumForm!: FormGroup
   idMuseum: string | undefined = ''
+  disables = false
+  disablesDeleteButton = false
 
   constructor(
     private fb: FormBuilder,
     private museumService: MuseumService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +49,7 @@ export class EditMuseumComponent implements OnInit {
   getMuseum() {
     this.museumService.getOneMuseumByName('masp').subscribe({
       next: (res) => {
+        this.disablesDeleteButton = false
         this.editMuseumForm.patchValue({
           name: res.name,
           CNPJ: res.document,
@@ -65,6 +71,7 @@ export class EditMuseumComponent implements OnInit {
   }
 
   editInput(control: string) {
+    this.disables = true
     this.editMuseumForm.get(control)?.enable()
   }
 
@@ -79,7 +86,7 @@ export class EditMuseumComponent implements OnInit {
           districtAddress: this.editMuseumForm.get("districtAddress")?.value,
           complementAddress: this.editMuseumForm.get("complementAddress")?.value,
           cityAddress: this.editMuseumForm.get("cityAddress")?.value,
-          stateAddress:  this.editMuseumForm.get("stateAddress")?.value,
+          stateAddress: this.editMuseumForm.get("stateAddress")?.value,
           CEP: this.editMuseumForm.get("CEP")?.value
         },
         description: this.editMuseumForm.get("description")?.value
@@ -97,6 +104,25 @@ export class EditMuseumComponent implements OnInit {
         }
       })
     }
+  }
+
+  deleteMuseum() {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: "Atenção!",
+        body: "Tem certeza que deseja deletar este museu?",
+        action: "deletar"
+      }
+    })
+      .afterClosed()
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.museumService.deleteMuseum(this.idMuseum)
+            console.log("museu deletado")
+          }
+        }
+      })
   }
 
   get nameErrors() {

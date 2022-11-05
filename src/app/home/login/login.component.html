@@ -6,8 +6,7 @@
       alt="logo do museu do Ipiranga">
   </div>
 
-
-  <form class="form-login" [formGroup]="signinForm" (submit)="login()">
+  <form class="form-login" [formGroup]="signinForm">
     <mat-form-field class="form-field-email" appearance="outline">
       <mat-label>
         E-mail
@@ -31,7 +30,7 @@
     </mat-form-field>
 
     <div class="form-button">
-      <button class="button-login" mat-raised-button color="primary">Login</button>
+      <button class="button-login" (click)="login()" mat-raised-button color="primary">Login</button>
     </div>
 
     <button type="button" class="button-pwd" mat-flat-button>Esqueceu a senha?</button>

@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -5,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Artifact } from 'src/app/interfaces/artifact';
 import { ArtifactService } from 'src/app/services/artifact.service';
+import { DialogComponent } from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-artifact',
@@ -16,11 +18,14 @@ export class EditArtifactComponent implements OnInit {
   editArtifactForm!: FormGroup
   artifact$!: Observable<Artifact[]>
   disables = true
+  idArtifact: string | undefined
+  disablesDeleteButton = false
 
   constructor(
     private fb: FormBuilder,
     private artifactService: ArtifactService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +51,8 @@ export class EditArtifactComponent implements OnInit {
     const idMuseum = this.editArtifactForm.get("id")?.value
     this.artifactService.getArtifact(idMuseum).subscribe({
       next: (res) => {
+        this.idArtifact = res._id
+        this.disablesDeleteButton = true
         this.editArtifactForm.patchValue({
           title: res.title,
           date: res.date,
@@ -95,6 +102,25 @@ export class EditArtifactComponent implements OnInit {
         }
       })
     }
+  }
+
+  deleteArtifact() {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: "Atenção!",
+        body: "Tem certeza que deseja deletar esta obra?",
+        action: "deletar"
+      }
+    })
+      .afterClosed()
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.artifactService.deleteArtifact(this.idArtifact)
+            console.log("obra deletada")
+          }
+        }
+      })
   }
 
   get idError() {

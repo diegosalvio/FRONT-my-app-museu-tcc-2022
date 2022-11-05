@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Artist } from 'src/app/interfaces/artist';
 import { ArtistService } from 'src/app/services/artist.service';
+import { DialogComponent } from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-artist',
@@ -15,12 +17,15 @@ export class EditArtistComponent implements OnInit {
 
   editArtistForm!: FormGroup
   artist$!: Observable<Artist[]>
+  disables = false
+  disablesDeleteButton = false
 
   constructor(
     private fb: FormBuilder,
     private museumService: MuseumService,
     private artistService: ArtistService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +49,7 @@ export class EditArtistComponent implements OnInit {
 
     this.artistService.getArtist(idArtist).subscribe({
       next: (res) => {
+        this.disablesDeleteButton = true
         this.editArtistForm.patchValue({
           name: res.name,
           birthDate: res.birthDate,
@@ -88,7 +94,28 @@ export class EditArtistComponent implements OnInit {
   editInput(control: string) {
     if (this.editArtistForm.get("id")?.valid) {
       this.editArtistForm.get(control)?.enable()
+      this.disables = true
     }
+  }
+
+  deleteArtist() {
+    const idArtist = this.editArtistForm.get("id")?.value
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: "Atenção!",
+        body: "Tem certeza que deseja deletar este artista?",
+        action: "deletar"
+      }
+    })
+      .afterClosed()
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            this.artistService.deleteArtist(idArtist)
+            console.log("artista deletado")
+          }
+        }
+      })
   }
 
   get idArtistError() {

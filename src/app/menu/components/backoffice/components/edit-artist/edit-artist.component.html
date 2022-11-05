@@ -49,6 +49,9 @@
     </mat-form-field>
   </p>
   <p>
-    <button mat-button (click)="submitEditedArtist()">Editar</button>
+    <button mat-button [disabled]="!disables" (click)="submitEditedArtist()">Editar</button>
+  </p>
+  <p>
+    <button mat-button [disabled]="!disablesDeleteButton" class="delete-button" (click)="deleteArtist()">Deletar</button>
   </p>
 </form>

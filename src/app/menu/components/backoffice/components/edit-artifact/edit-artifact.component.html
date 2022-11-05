@@ -65,4 +65,7 @@
   <p>
     <button mat-button [disabled]="disables" (click)="submitEditArtifact()">Editar</button>
   </p>
+  <p>
+    <button mat-button [disabled]="!disablesDeleteButton" class="delete-button"  (click)="deleteArtifact()">Deletar</button>
+  </p>
 </form>

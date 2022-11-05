@@ -89,4 +89,8 @@ export class MuseumService {
   updateMuseum(id: string | undefined, museum: Museum) {
     return this.httpClient.patch(`${API_URL}/update/${id}`, museum)
   }
+
+  deleteMuseum(id?: string): Observable<Museum> {
+    return this.httpClient.delete<Museum>(`${API_URL}/delete/${id}`)
+  }
 }

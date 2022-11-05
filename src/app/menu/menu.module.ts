@@ -40,6 +40,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { EditMuseumComponent } from './components/backoffice/components/edit-museum/edit-museum.component';
 import { EditArtistComponent } from './components/backoffice/components/edit-artist/edit-artist.component';
 import { EditArtifactComponent } from './components/backoffice/components/edit-artifact/edit-artifact.component';
+import { NewVisitComponent } from './components/backoffice/components/new-visit/new-visit.component';
+import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { EditArtifactComponent } from './components/backoffice/components/edit-a
     NewArtifactComponent,
     EditMuseumComponent,
     EditArtistComponent,
-    EditArtifactComponent
+    EditArtifactComponent,
+    NewVisitComponent,
+    EditVisitComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
