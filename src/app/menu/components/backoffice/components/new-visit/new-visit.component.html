@@ -1,0 +1,30 @@
+<form [formGroup]="visitForm" class="wrapper-forms">
+  <p>
+    <mat-form-field>
+      <mat-label>Tipo de visita</mat-label>
+      <mat-select placeholder="Selecione um tipo de visita" formControlName="type">
+        <mat-option  *ngFor="let route of routes" [value]="route">
+          {{route.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf=""></mat-error>
+    </mat-form-field>
+  </p>
+  <mat-label *ngIf="artifactControl.controls.length">Lista de obras</mat-label>
+  <ng-container formArrayName="artifacts">
+    <div *ngFor="let artifact of artifactControl.controls; let index = index" [formGroupName]="index">
+      <mat-form-field>
+        <mat-label>Obra</mat-label>
+        <mat-icon class="delete-button" matSuffix (click)="remove(index)">delete</mat-icon>
+        <mat-select formControlName="value">
+          <mat-option *ngFor="let artifact of artifacts$ | async" [value]="artifact._id">
+            {{artifact.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    </ng-container>
+    <mat-icon (click)="add()">add</mat-icon>
+    <button mat-button color="accent" (click)="submitVisitation()">Criar Visitação</button>
+</form>
+

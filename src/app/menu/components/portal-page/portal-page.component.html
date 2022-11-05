@@ -36,4 +36,16 @@
       <button mat-button>CONFERIR</button>
     </mat-card-actions>
   </mat-card>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <mat-icon>app_registration</mat-icon>
+      </div>
+      <mat-card-title>Backoffice</mat-card-title>
+    </mat-card-header>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions align="end">
+      <button mat-button [routerLink]="['backoffice']">IR</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
