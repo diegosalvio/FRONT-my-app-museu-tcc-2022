@@ -24,13 +24,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AddCommentsComponent } from './components/add-comments/add-comments.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     DialogComponent,
     StepperChooseRouteComponent,
-    VisitModalComponent
+    VisitModalComponent,
+    AddCommentsComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,

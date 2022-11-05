@@ -46,4 +46,7 @@ export class HeaderComponent {
   chooseMuseum() {
     this.router.navigate(['menu/choose-museum'])
   }
+  addComments(){
+    this.router.navigate(['menu/add-comments'])
+  }
 }
