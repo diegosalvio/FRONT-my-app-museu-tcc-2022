@@ -1,0 +1,39 @@
+<div class="conteudo-div-comments">
+  <div class="add-comments-div">
+    <h1>
+      Registrar experiência
+    </h1>
+    <p>
+      Por favor, conte para nós<br/>
+      o que você achou da visita.<br/>
+      Deixe sugestões do que poderia melhorar<br/>
+      para deixar a visita mais interessante.
+    </p>
+    <form [formGroup]="commentForm" class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Registrar experiência</mat-label>
+        <textarea matInput formControlName="comment" #message maxlength="500" placeholder="Minha experiência foi..."></textarea>
+        <mat-hint align="start"></mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
+      </mat-form-field>
+    </form>
+    <p>
+      De acordo com a sua experiência, dê uma<br/>
+      nota de 0 a 5 estrelas:
+    </p>
+    <div>
+      <button class="stars" mat-icon-button color="accent" *ngFor="let r of ratingArr; index as i"
+        (click)="onClick(i)">
+        <mat-icon>
+          {{returStar(i)}}
+        </mat-icon>
+      </button>
+    </div><br/>
+    <div class="buttons-add-and-later">
+      <button mat-raised-button class="add-comments-button" color="primary" (click)="addComments()">Registrar experiência</button>
+      <button mat-raised-button class="later-comments-button" (click)="openDialogLater()">Registrar mais tarde</button>
+      <button mat-raised-button class="cancel-comments-button" color="warn" (click)="openDialogCancel()">Cancelar registro</button>
+    </div>
+  </div>
+</div>
+
