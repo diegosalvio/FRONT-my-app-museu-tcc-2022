@@ -1,0 +1,34 @@
+<form class="wrapper-forms" [formGroup]="artistForm" (submit)="submitArtist()">
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Nome do Artista</mat-label>
+      <input matInput placeholder="digite o nome do artista" formControlName="name">
+      <mat-error *ngIf="nameError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Data de nascimento</mat-label>
+      <input matInput placeholder="digite a data de nascimento do artista" formControlName="birthDate"
+        mask="00/00/0000">
+      <mat-error *ngIf="birthDateError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Informações biográficas</mat-label>
+      <input matInput placeholder="digite a data de nascimento do artista" formControlName="informationAbout">
+      <mat-error *ngIf="informationAboutError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="standard">
+      <mat-label>Retrato</mat-label>
+      <input matInput placeholder="Insira uma url com o retrato do artista" formControlName="portrait">
+      <mat-error *ngIf="portraitError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button>Cadastrar</button>
+  </p>
+</form>

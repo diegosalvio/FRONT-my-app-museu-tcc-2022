@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FreeVisitationComponent } from './components/visit-component/visit-modal/free-visitation/free-visitation.component';
@@ -30,6 +31,18 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { PortalPageComponent } from './components/portal-page/portal-page.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { AddCommentsComponent } from './components/add-comments/add-comments.component';
+import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NewMuseumComponent } from './components/backoffice/components/new-museum/new-museum.component';
+import { NewArtistComponent } from './components/backoffice/components/new-artist/new-artist.component';
+import { NewArtifactComponent } from './components/backoffice/components/new-artifact/new-artifact.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { EditMuseumComponent } from './components/backoffice/components/edit-museum/edit-museum.component';
+import { EditArtistComponent } from './components/backoffice/components/edit-artist/edit-artist.component';
+import { EditArtifactComponent } from './components/backoffice/components/edit-artifact/edit-artifact.component';
+import { NewVisitComponent } from './components/backoffice/components/new-visit/new-visit.component';
+import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +54,16 @@ import { AddCommentsComponent } from './components/add-comments/add-comments.com
     DialogQrCodeComponent,
     PortalPageComponent,
     EditUserComponent,
-    AddCommentsComponent
+    AddCommentsComponent,
+    BackofficeComponent,
+    NewMuseumComponent,
+    NewArtistComponent,
+    NewArtifactComponent,
+    EditMuseumComponent,
+    EditArtistComponent,
+    EditArtifactComponent,
+    NewVisitComponent,
+    EditVisitComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -63,7 +85,11 @@ import { AddCommentsComponent } from './components/add-comments/add-comments.com
     MatDividerModule,
     GoogleMapsModule,
     ZXingScannerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTabsModule,
+    MatSnackBarModule,
+    NgxMaskModule,
+    MatAutocompleteModule
   ],
   exports: [
     MenuComponent
