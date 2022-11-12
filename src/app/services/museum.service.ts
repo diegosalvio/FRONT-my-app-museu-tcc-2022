@@ -37,7 +37,7 @@ export class MuseumService {
 
   }
 
-  getOneMuseumByName(name: string) {
+  getOneMuseumByName(name: string | undefined) {
     return this.httpClient.get<Museum>(`${API_URL}/${name}`).pipe(
       tap(res => {
         console.log(res)
@@ -65,7 +65,7 @@ export class MuseumService {
     )
   }
 
-  getVisitation(idMuseum: string, type: string) {
+  getVisitation(idMuseum: string | undefined, type: string) {
     return this.httpClient.get<Visitation>(`${API_URL}/visitation/${type}/${idMuseum}`).pipe(
       map(resp => {
         this.visitationModel = resp.typeVisit

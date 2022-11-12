@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="canLoad;else loader">
   <mat-tab-group>
 
     <mat-tab label="Museu">
@@ -7,17 +7,7 @@
           <app-new-museum></app-new-museum>
         </mat-tab>
         <mat-tab label="Editar">
-          <app-edit-museum></app-edit-museum>
-        </mat-tab>
-        <mat-tab label="Visitação">
-          <mat-tab-group>
-            <mat-tab label="Cadastrar">
-              <app-new-visit></app-new-visit>
-            </mat-tab>
-            <mat-tab label="Editar">
-              <app-edit-visit></app-edit-visit>
-            </mat-tab>
-          </mat-tab-group>
+          <app-edit-museum [museum]="this.museumName"></app-edit-museum>
         </mat-tab>
       </mat-tab-group>
     </mat-tab>
@@ -25,10 +15,10 @@
     <mat-tab label="Artista">
       <mat-tab-group mat-align-tabs="end">
         <mat-tab label="Cadastrar">
-          <app-new-artist></app-new-artist>
+          <app-new-artist [museum]="this.museumName"></app-new-artist>
         </mat-tab>
         <mat-tab label="Editar">
-          <app-edit-artist></app-edit-artist>
+          <app-edit-artist [museum]="this.museumName"></app-edit-artist>
         </mat-tab>
       </mat-tab-group>
     </mat-tab>
@@ -36,14 +26,30 @@
     <mat-tab label="Obra">
       <mat-tab-group mat-align-tabs="end">
         <mat-tab label="Cadastrar">
-          <app-new-artifact></app-new-artifact>
+          <app-new-artifact [museum]="this.museumName"></app-new-artifact>
         </mat-tab>
         <mat-tab label="Editar">
           <app-edit-artifact></app-edit-artifact>
         </mat-tab>
-        <mat-tab label="Third">Content 3</mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+
+    <mat-tab label="Visitação">
+      <mat-tab-group>
+        <mat-tab label="Cadastrar">
+          <app-new-visit [museum]="this.museumName"></app-new-visit>
+        </mat-tab>
+        <mat-tab label="Editar">
+          <app-edit-visit [museum]="this.museumName"></app-edit-visit>
+        </mat-tab>
       </mat-tab-group>
     </mat-tab>
 
   </mat-tab-group>
 </div>
+
+<ng-template #loader>
+  <div class="div-loader">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

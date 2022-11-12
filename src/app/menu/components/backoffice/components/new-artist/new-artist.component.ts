@@ -1,7 +1,7 @@
 import { Museum } from 'src/app/interfaces/museum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Artist } from 'src/app/interfaces/artist';
 import { MuseumService } from 'src/app/services/museum.service';
 import { ArtistService } from 'src/app/services/artist.service';
@@ -12,6 +12,9 @@ import { ArtistService } from 'src/app/services/artist.service';
   styleUrls: ['./new-artist.component.scss']
 })
 export class NewArtistComponent implements OnInit {
+
+
+  @Input() museum: string | undefined
 
   artistForm!: FormGroup
   private idMuseum!: string | undefined
@@ -35,7 +38,7 @@ export class NewArtistComponent implements OnInit {
   }
 
   getMuseum() {
-    this.museumService.getOneMuseumByName('masp').subscribe({
+    this.museumService.getOneMuseumByName(this.museum).subscribe({
         next: (res: Museum) => {
           this.idMuseum = res?._id
         },

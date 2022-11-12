@@ -6,3 +6,9 @@
 mat-card {
   margin-bottom: 20px;
 }
+
+mat-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

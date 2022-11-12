@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="canLoad;else loader">
   <h1>Portal do Usuário</h1>
   <mat-card class="example-card">
     <mat-card-header>
@@ -36,7 +36,7 @@
       <button mat-button>CONFERIR</button>
     </mat-card-actions>
   </mat-card>
-  <mat-card class="example-card">
+  <mat-card class="example-card" *ngIf="museumName">
     <mat-card-header>
       <div mat-card-avatar>
         <mat-icon>app_registration</mat-icon>
@@ -49,3 +49,7 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+<ng-template #loader>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,12 +1,14 @@
+import { DialogComponent } from './../../../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ArtifactService } from 'src/app/services/artifact.service';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Artifact } from 'src/app/interfaces/artifact';
 import { VisitService } from 'src/app/services/visit.service';
-import { Visitation } from 'src/app/interfaces/visitation';
+import { NewVisitation } from 'src/app/interfaces/visitation';
 
 @Component({
   selector: 'app-new-visit',
@@ -14,6 +16,9 @@ import { Visitation } from 'src/app/interfaces/visitation';
   styleUrls: ['./new-visit.component.scss']
 })
 export class NewVisitComponent implements OnInit {
+
+  @Input() museum: string | undefined
+
   routes = [{
     id: 1,
     name: "Curta"
@@ -21,47 +26,20 @@ export class NewVisitComponent implements OnInit {
   {
     id: 2,
     name: "Longa"
-  },
-  {
-    id: 3,
-    name: "Livre"
   }]
-
-
-  exemplos = [
-    {
-      viewValue: 1,
-      viewDisplay: "opção 1"
-    },
-    {
-      viewValue: 2,
-      viewDisplay: "opção 2"
-    },
-    {
-      viewValue: 3,
-      viewDisplay: "opção 3"
-    },
-    {
-      viewValue: 4,
-      viewDisplay: "opção 4"
-    },
-    {
-      viewValue: 5,
-      viewDisplay: "opção 5"
-    },
-  ]
-  indexo = 1
-  items = [""]
   visitForm!: FormGroup
   idMuseum: string | undefined
   artifacts$!: Observable<Artifact[]>
+  canSubmit = true
+  list!: Array<string>
 
   constructor(
     private fb: FormBuilder,
     private artifactService: ArtifactService,
     private museumService: MuseumService,
     private snackbar: MatSnackBar,
-    private visitService: VisitService
+    private visitService: VisitService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -76,28 +54,30 @@ export class NewVisitComponent implements OnInit {
     return this.visitForm.get("artifacts") as FormArray
   }
 
-  createForm() {
-    this.fb.group({
-      value: [""],
-    })
-  }
-
   add() {
     this.artifactControl.push(this.fb.group({
-      value: [""],
+      idArtifact: ["", [Validators.required]],
     }))
   }
 
   remove(index: any) {
-    this.artifactControl.removeAt(index)
-  }
-
-  exemplo() {
-    console.log(this.visitForm.getRawValue())
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: "Atenção!",
+        body: "Remover obra da lista?",
+        action: "excluir"
+      }
+    }).afterClosed().subscribe(
+      (res) => {
+        if(res) {
+          this.artifactControl.removeAt(index)
+        }
+      }
+    )
   }
 
   getMuseum() {
-    this.museumService.getOneMuseumByName('masp').subscribe({
+    this.museumService.getOneMuseumByName(this.museum).subscribe({
       next: (res) => {
         this.idMuseum = res._id
       },
@@ -115,14 +95,41 @@ export class NewVisitComponent implements OnInit {
     this.artifacts$ = this.artifactService.getAllArtifactsFromMuseum(this.idMuseum)
   }
 
-  submitVisitation() {
-    if(this.visitForm.valid) {
-      const visitation: Visitation = {
-        typeVisit: this.visitForm.get("type")?.value,
-        visitationList: this.visitForm.get("artifacts")?.value
-      }
+  getArtifactList() {
+    const arr = this.visitForm.get("artifacts")?.value
+    const newArr = arr.map((value: any)=> {
+      return value.idArtifact
+    })
+    const unique = newArr.filter((value: string, index: number, array:[string]) => array.indexOf(value) !== index)
+    if(unique.length > 0) {
+      this.canSubmit = false
+      this.snackbar.open("Não repita itens na lista", "okay")
+      newArr.length = 0
+    } else{
+      this.canSubmit = true
+    }
 
-      console.log(visitation)
+    this.list = newArr
+  }
+
+  submitVisitation() {
+    this.getArtifactList()
+    if(this.visitForm.valid && this.canSubmit) {
+      const visitation: NewVisitation = {
+        type: this.visitForm.get("type")?.value.toLowerCase(),
+        artifactList: this.list
+      }
+      this.visitService.newVisit(this.idMuseum, visitation).subscribe({
+        next: (res) => {
+          console.log("A seguinte rota foi adicionada: ",res)
+        },
+        error: (error) => {
+          this.snackbar.open(error, "okay")
+        },
+        complete: () => {
+          this.snackbar.open("Rota cadastrada com sucesso!", "fechar")
+        }
+      })
     }
   }
 }

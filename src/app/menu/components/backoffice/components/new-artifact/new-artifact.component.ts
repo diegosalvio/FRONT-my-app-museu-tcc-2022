@@ -3,7 +3,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { ArtistService } from 'src/app/services/artist.service';
 import { MuseumService } from 'src/app/services/museum.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Museum } from 'src/app/interfaces/museum';
 import { Artist } from 'src/app/interfaces/artist';
 import { ArtifactService } from 'src/app/services/artifact.service';
@@ -15,6 +15,8 @@ import { Artifact } from 'src/app/interfaces/artifact';
   styleUrls: ['./new-artifact.component.scss']
 })
 export class NewArtifactComponent implements OnInit {
+
+  @Input() museum: string | undefined
 
   artifactForm!: FormGroup
   idMuseum!: string | undefined
@@ -44,7 +46,7 @@ export class NewArtifactComponent implements OnInit {
   }
 
   getMuseum() {
-    this.museumService.getOneMuseumByName('masp').subscribe({
+    this.museumService.getOneMuseumByName(this.museum).subscribe({
       next: (res: Museum) => {
         this.idMuseum = res?._id
       },
