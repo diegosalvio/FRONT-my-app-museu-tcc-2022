@@ -14,3 +14,8 @@ export interface TypeVisit {
 
 export interface VisitationList extends Array<Artifact> {
 }
+
+export interface NewVisitation {
+  type: string,
+  artifactList: Array<string>
+}

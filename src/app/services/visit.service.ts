@@ -1,4 +1,4 @@
-import { Visitation } from './../interfaces/visitation';
+import { NewVisitation, Visitation } from './../interfaces/visitation';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,15 @@ export class VisitService {
     private httpClient: HttpClient
   ) { }
 
-  newVisit(idMuseum: string | undefined, visitation: Visitation): Observable<Visitation> {
-    return this.httpClient.post<Visitation>(`/museum/register/visitation/${idMuseum}`, visitation)
+  newVisit(idMuseum: string | undefined, visitation: NewVisitation): Observable<NewVisitation> {
+    return this.httpClient.post<NewVisitation>(`${url}/museum/register/visitation/${idMuseum}`, visitation)
+  }
+
+  getVisitationList(idMuseum: string | undefined, type: string) {
+    return this.httpClient.get<Visitation>(`${url}/museum/visitation/${type}/${idMuseum}`)
+  }
+
+  updateVisit(id: string | undefined, editedVisitation: NewVisitation): Observable<NewVisitation> {
+    return this.httpClient.patch<NewVisitation>(`${url}/museum/update/visitation/${id}`, editedVisitation)
   }
 }

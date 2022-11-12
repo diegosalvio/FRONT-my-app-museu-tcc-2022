@@ -1,0 +1,16 @@
+@import "../../backoffice.component.scss";
+
+.wrapper-forms {
+  margin-top: 10px;
+}
+
+.delete-button {
+  position: relative;
+  top: 9px;
+  left: 20px;
+}
+.footer-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

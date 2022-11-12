@@ -11,4 +11,9 @@ export interface UserInfo {
   email: string;
   login?: string;
   password?: string;
+  admin?: Admin
+}
+
+export interface Admin {
+  museumName: string
 }

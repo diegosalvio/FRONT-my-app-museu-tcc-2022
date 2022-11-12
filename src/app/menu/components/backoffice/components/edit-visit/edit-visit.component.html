@@ -1,1 +1,38 @@
-<p>edit-visit works!</p>
+<form [formGroup]="editVisitForm" class="wrapper-forms">
+  <p>
+    <mat-form-field>
+      <mat-label>Tipo de visita</mat-label>
+      <mat-select placeholder="Selecione um tipo de visita" formControlName="type">
+        <mat-option *ngFor="let route of routes" [value]="route.name">
+          {{route.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf=""></mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button (click)="getVisitByType()">Pegar<mat-icon>arrow_forward_ios</mat-icon></button>
+  </p>
+  <h1 *ngIf="artifactControl.controls.length">Lista de obras</h1>
+  <ng-container formArrayName="artifacts">
+    <div *ngFor="let artifact of artifactControl.controls; let index = index" [formGroupName]="index">
+      <mat-form-field>
+        <mat-label>Obra</mat-label>
+        <mat-icon class="delete-button" matSuffix (click)="remove(index)">delete</mat-icon>
+        <mat-select formControlName="idArtifact">
+          <mat-option *ngFor="let artifact of artifacts$ | async" [value]="artifact._id">
+            {{artifact.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="artifactControl.length">
+    <p>
+      <mat-icon *ngIf="!showAddButton" (click)="editInput()">edit</mat-icon>
+      <mat-icon *ngIf="showAddButton" (click)="add()">add</mat-icon>
+    </p>
+    <button mat-button color="accent" (click)="submitEditedVisitation()" [disabled]="!editVisitForm.valid && showAddButton">Criar
+      Visitação</button>
+  </ng-container>
+</form>

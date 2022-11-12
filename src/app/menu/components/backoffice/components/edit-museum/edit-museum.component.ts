@@ -2,7 +2,7 @@ import { DialogComponent } from './../../../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Museum } from 'src/app/interfaces/museum';
 
@@ -17,6 +17,8 @@ const regexCEP = "[0-9]{5}-[0-9]{3}"
 })
 export class EditMuseumComponent implements OnInit {
 
+  @Input() museum: string | undefined
+
   editMuseumForm!: FormGroup
   idMuseum: string | undefined = ''
   disables = false
@@ -30,6 +32,7 @@ export class EditMuseumComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("edit museum", this.museum)
     this.editMuseumForm = this.fb.group({
       name: ["", [Validators.required, Validators.maxLength(25), Validators.minLength(3)]],
       CNPJ: ["", [Validators.required, Validators.pattern(regexCNPJ)]],
@@ -47,7 +50,7 @@ export class EditMuseumComponent implements OnInit {
   }
 
   getMuseum() {
-    this.museumService.getOneMuseumByName('masp').subscribe({
+    this.museumService.getOneMuseumByName(this.museum).subscribe({
       next: (res) => {
         this.disablesDeleteButton = false
         this.editMuseumForm.patchValue({

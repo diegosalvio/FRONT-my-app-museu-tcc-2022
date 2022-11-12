@@ -3,7 +3,7 @@
     <mat-form-field>
       <mat-label>Tipo de visita</mat-label>
       <mat-select placeholder="Selecione um tipo de visita" formControlName="type">
-        <mat-option  *ngFor="let route of routes" [value]="route">
+        <mat-option  *ngFor="let route of routes" [value]="route.name">
           {{route.name}}
         </mat-option>
       </mat-select>
@@ -16,7 +16,7 @@
       <mat-form-field>
         <mat-label>Obra</mat-label>
         <mat-icon class="delete-button" matSuffix (click)="remove(index)">delete</mat-icon>
-        <mat-select formControlName="value">
+        <mat-select formControlName="idArtifact">
           <mat-option *ngFor="let artifact of artifacts$ | async" [value]="artifact._id">
             {{artifact.title}}
           </mat-option>
@@ -25,6 +25,6 @@
     </div>
     </ng-container>
     <mat-icon (click)="add()">add</mat-icon>
-    <button mat-button color="accent" (click)="submitVisitation()">Criar Visitação</button>
+    <button mat-button color="accent" (click)="submitVisitation()" [disabled]="!visitForm.valid">Criar Visitação</button>
 </form>
 

@@ -2,7 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Artist } from 'src/app/interfaces/artist';
 import { ArtistService } from 'src/app/services/artist.service';
@@ -15,10 +15,13 @@ import { DialogComponent } from '../../../dialog/dialog.component';
 })
 export class EditArtistComponent implements OnInit {
 
+  @Input() museum: string | undefined
+
   editArtistForm!: FormGroup
   artist$!: Observable<Artist[]>
   disables = false
   disablesDeleteButton = false
+  museumId?: string
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +32,7 @@ export class EditArtistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getArtists()
+    this.getMuseumByName()
     this.editArtistForm = this.fb.group({
       id: ["", [Validators.required]],
       name: ["", [Validators.required, Validators.minLength(3)]],
@@ -41,7 +44,15 @@ export class EditArtistComponent implements OnInit {
   }
 
   getArtists() {
-    this.artist$ = this.artistService.getArtists("6339dbdef5747cb44694313f")
+    this.artist$ = this.artistService.getArtists(this.museumId)
+  }
+
+  getMuseumByName() {
+    this.museumService.getOneMuseumByName(this.museum).subscribe({
+      next: (res) => this.museumId = res._id,
+      error: (error) => console.log(error),
+      complete: () => this.getArtists()
+    })
   }
 
   getArtist() {
