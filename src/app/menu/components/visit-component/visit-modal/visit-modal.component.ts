@@ -59,7 +59,21 @@ export class VisitModalComponent implements OnInit, OnDestroy {
     if (this.index < index) {
       this.index = this.index + 1
       this.museumService.index = this.index
-    } else console.log("Vai para a página final")
+    } else {
+      this.dialog.open(DialogComponent, {
+        data: {
+          title: "Parabéns!",
+          body: "Você finalizou sua visitação",
+          action: "Prosseguir"
+        }
+      }).afterClosed().subscribe((res) => {
+        if(res) {
+          this.museumService.index = 0
+          this.museumService.showReturn = false
+          this.router.navigate(["menu/add-comments"])
+        }
+      })
+    }
   }
   previousOnTheList() {
     if (this.index > 0) {

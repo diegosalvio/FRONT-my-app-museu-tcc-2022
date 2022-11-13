@@ -1,0 +1,21 @@
+<div *ngFor="let comment of comments$ | async">
+  <ng-container *ngIf="!comment.later">
+    <mat-card>
+      <mat-card-title>
+        {{comment.commentary}}
+      </mat-card-title>
+      <mat-card-content>
+        <button class="stars" mat-icon-button color="accent" *ngFor="let rating of [].constructor(comment.rating)">
+        <mat-icon>
+          star
+        </mat-icon>
+        </button>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="editComment(comment._id)"><mat-icon>edit</mat-icon></button>
+        <button mat-raised-button color="warn" (click)="deleteComment(comment._id)"><mat-icon>delete</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>
+

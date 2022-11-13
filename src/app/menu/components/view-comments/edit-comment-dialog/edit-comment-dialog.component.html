@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Editar Comentário</h1>
+<div mat-dialog-content *ngIf="canLoad;else loader">
+  <label></label>
+  <form [formGroup]="editCommentForm" class="example-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Registrar experiência</mat-label>
+      <textarea matInput formControlName="comment" #message maxlength="500"
+        placeholder="Minha experiência foi..."></textarea>
+    </mat-form-field>
+    <mat-icon class="edit-icon" (click)="editInput()" matSuffix>edit</mat-icon>
+    <button class="stars" mat-icon-button color="accent" *ngFor="let r of ratingArr; index as i" (click)="onClick(i)">
+      <mat-icon>
+        {{returStar(i)}}
+      </mat-icon>
+    </button>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="submitEditedComment()">Editar</button>
+</div>
+
+<ng-template #loader>
+  <mat-progress-bar mode="buffer"></mat-progress-bar>
+</ng-template>
