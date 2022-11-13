@@ -33,7 +33,7 @@
     </mat-card-header>
     <mat-divider inset></mat-divider>
     <mat-card-actions align="end">
-      <button mat-button>CONFERIR</button>
+      <button mat-button [routerLink]="['view-comments']">CONFERIR</button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="example-card" *ngIf="museumName">

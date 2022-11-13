@@ -25,6 +25,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FreeVisitationComponent } from './components/visit-component/visit-modal/free-visitation/free-visitation.component';
@@ -47,6 +48,8 @@ import { NewVisitComponent } from './components/backoffice/components/new-visit/
 import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
 import { NewScheduleComponent } from './components/backoffice/components/new-schedule/new-schedule.component';
 import { EditScheduleComponent } from './components/backoffice/components/edit-schedule/edit-schedule.component';
+import { ViewCommentsComponent } from './components/view-comments/view-comments.component';
+import { EditCommentDialogComponent } from './components/view-comments/edit-comment-dialog/edit-comment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +72,9 @@ import { EditScheduleComponent } from './components/backoffice/components/edit-s
     NewVisitComponent,
     EditVisitComponent,
     NewScheduleComponent,
-    EditScheduleComponent
+    EditScheduleComponent,
+    ViewCommentsComponent,
+    EditCommentDialogComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -97,7 +102,8 @@ import { EditScheduleComponent } from './components/backoffice/components/edit-s
     NgxMaskModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressBarModule
   ],
   exports: [
     MenuComponent

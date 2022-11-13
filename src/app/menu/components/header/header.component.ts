@@ -42,9 +42,4 @@ export class HeaderComponent implements OnInit {
   get showReturnButton() {
     return this.museumService.index && this.museumService.showReturn ? this.canReturn = true : this.canReturn = false
   }
-
-  openScanner() {
-
-
-  }
 }
