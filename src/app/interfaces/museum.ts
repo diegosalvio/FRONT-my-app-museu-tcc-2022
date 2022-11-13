@@ -14,6 +14,15 @@ export interface Museum {
     cityAddress: string,
     stateAddress: string
   },
+  schedule?: {
+    title: string,
+    description: string,
+    date: {
+      startDate: Date,
+      endDate: Date
+    },
+    image: string
+  }
   description: string
 }
 

@@ -1,6 +1,5 @@
 <div class="wrapper" *ngIf="canLoad;else loader">
   <mat-tab-group>
-
     <mat-tab label="Museu">
       <mat-tab-group mat-align-tabs="end">
         <mat-tab label="Cadastrar">
@@ -41,6 +40,18 @@
         </mat-tab>
         <mat-tab label="Editar">
           <app-edit-visit [museum]="this.museumName"></app-edit-visit>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+
+
+    <mat-tab label="Programação">
+      <mat-tab-group>
+        <mat-tab label="Cadastrar">
+          <app-new-schedule [museum]="this.museum"></app-new-schedule>
+        </mat-tab>
+        <mat-tab label="Editar">
+          <app-edit-schedule [museum]="this.museum"></app-edit-schedule>
         </mat-tab>
       </mat-tab-group>
     </mat-tab>
