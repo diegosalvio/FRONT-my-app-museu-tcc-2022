@@ -1,0 +1,18 @@
+<div *ngFor="let comment of comments$ | async">
+  <mat-card>
+    <mat-card-title>
+      {{comment.commentary}}
+    </mat-card-title>
+    <mat-card-content>
+      <button class="stars" mat-icon-button color="accent" *ngFor="let r of ratingArr; index as i">
+      <mat-icon>
+        {{returStar()}}
+      </mat-icon>
+      </button>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Editar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

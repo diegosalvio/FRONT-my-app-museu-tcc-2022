@@ -43,6 +43,7 @@ import { EditArtistComponent } from './components/backoffice/components/edit-art
 import { EditArtifactComponent } from './components/backoffice/components/edit-artifact/edit-artifact.component';
 import { NewVisitComponent } from './components/backoffice/components/new-visit/new-visit.component';
 import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
+import { ViewCommentsComponent } from './components/view-comments/view-comments.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EditVisitComponent } from './components/backoffice/components/edit-visi
     EditArtistComponent,
     EditArtifactComponent,
     NewVisitComponent,
-    EditVisitComponent
+    EditVisitComponent,
+    ViewCommentsComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,

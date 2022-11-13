@@ -17,11 +17,11 @@ export class AddCommentsComponent implements OnInit {
   ratingArr: boolean [] = [];
   commentForm!:FormGroup
 
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private formBuider: FormBuilder,
-    private addCommentService: AddCommentService
+    private formBuider: FormBuilder
     ) {
       this.ratingArr = Array(this.starCount).fill(false)
     }
@@ -45,18 +45,6 @@ export class AddCommentsComponent implements OnInit {
     }
 
     addComments(){
-      if(this.commentForm.valid){
-        const review: Comment = {
-          commentary: this.commentForm.get('comment')?.value,
-          rating: this.rating,
-        }
-        console.log(review)
-        this.addCommentService.newComment("62db010d11c6ee8087104b74", review).subscribe(
-          res => {
-            console.log(res)
-          }
-        )
-      }
       this.dialog.open(DialogComponent, {
         data: {
           title: "Obrigada :)",
@@ -65,24 +53,28 @@ export class AddCommentsComponent implements OnInit {
         }
       }).afterClosed().subscribe(res => {
         if(res){
+          if(this.commentForm.valid){
+            const review: Comment = {
+              commentary: this.commentForm.get('comment')?.value,
+              rating: this.rating,
+            }
+            console.log(review)
+          }
           this.router.navigate(["menu"])
         }
       })
     }
 
-    openDialogLater(){
+    openDialogLater(): void{
       this.dialog.open(DialogComponent, {
         data: {
           title: "Atenção!",
           body: "Tem certeza que deseja registrar a experiência mais tarde?",
           action: "Sim"
         }
-      }).afterClosed().subscribe(res => {
-        if(res) {
-          this.router.navigate(["menu"])
-        }
       })
     }
+
 
     openDialogCancel(){
       this.dialog.open(DialogComponent, {
