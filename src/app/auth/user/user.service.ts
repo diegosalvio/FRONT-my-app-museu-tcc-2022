@@ -14,6 +14,7 @@ const url = environment.URL_BASE
 export class UserService {
 
   private userSubject = new BehaviorSubject<User>({})
+  idUser: number | undefined
 
   private token!: any
 

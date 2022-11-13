@@ -23,6 +23,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FreeVisitationComponent } from './components/visit-component/visit-modal/free-visitation/free-visitation.component';
@@ -44,6 +45,7 @@ import { EditArtifactComponent } from './components/backoffice/components/edit-a
 import { NewVisitComponent } from './components/backoffice/components/new-visit/new-visit.component';
 import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
 import { ViewCommentsComponent } from './components/view-comments/view-comments.component';
+import { EditCommentDialogComponent } from './components/view-comments/edit-comment-dialog/edit-comment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import { ViewCommentsComponent } from './components/view-comments/view-comments.
     EditArtifactComponent,
     NewVisitComponent,
     EditVisitComponent,
-    ViewCommentsComponent
+    ViewCommentsComponent,
+    EditCommentDialogComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -91,7 +94,8 @@ import { ViewCommentsComponent } from './components/view-comments/view-comments.
     MatTabsModule,
     MatSnackBarModule,
     NgxMaskModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressBarModule
   ],
   exports: [
     MenuComponent

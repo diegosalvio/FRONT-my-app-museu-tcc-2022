@@ -15,14 +15,19 @@ export class AddCommentService {
     private httpClient: HttpClient
   ) { }
 
-  newComment(idperson: string, newComment: Comment){
+  newComment(idperson: string | undefined, newComment: Comment){
     return this.httpClient.post(`${url}/person/add-comment/${idperson}`, newComment)
   }
-  getComments(id:string): Observable<Comment[]>{
+  getComments(id:number | undefined): Observable<Comment[]>{
     return this.httpClient.get<Comment[]>(`${url}/person/get-comments/${id}`)
   }
-
-  deleteComment(id:string): Observable<Comment[]>{
-    return this.httpClient.delete<Comment[]>(`${url}/person/delete-comment/${id}`)
+  getComment(id:string): Observable<Comment>{
+    return this.httpClient.get<Comment>(`${url}/person/get-comment/${id}`)
+  }
+  updateComment(id: string, comment: Comment) {
+    return this.httpClient.patch<Comment>(`${url}/person/update-comment/${id}`, comment)
+  }
+  deleteComment(id:string | undefined): Observable<Comment>{
+    return this.httpClient.delete<Comment>(`${url}/person/delete-comment/${id}`)
   }
 }
