@@ -1,0 +1,44 @@
+<form class="wrapper-forms" [formGroup]="editScheduleForm" *ngIf="museum">
+  <p>
+    <span>{{museum.name}}</span>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Título da programação</mat-label>
+      <input matInput formControlName="title">
+      <mat-error *ngIf="titleError">Campo inválido</mat-error>
+      <mat-icon matSuffix (click)="editInput('title')">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Descrição da programação</mat-label>
+      <input matInput formControlName="description">
+      <mat-error *ngIf="descriptionError">Campo inválido</mat-error>
+      <mat-icon matSuffix (click)="editInput('description')">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>Data da programação</mat-label>
+      <mat-date-range-input [rangePicker]="dp">
+        <input matStartDate formControlName="startDate" >
+        <input matEndDate formControlName="endDate" >
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-date-range-picker #dp></mat-date-range-picker>
+      <mat-icon matSuffix (click)="editDate()">edit</mat-icon>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <mat-label>URL da imagem</mat-label>
+      <input matInput formControlName="image">
+      <mat-icon matSuffix (click)="editInput('image')">edit</mat-icon>
+      <mat-error *ngIf="imageError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+  <p>
+    <button mat-button (click)="editSchedule()" [disabled]="!formTouched">Submit</button>
+  </p>
+</form>

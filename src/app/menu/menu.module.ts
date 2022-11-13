@@ -23,6 +23,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FreeVisitationComponent } from './components/visit-component/visit-modal/free-visitation/free-visitation.component';
@@ -43,6 +45,8 @@ import { EditArtistComponent } from './components/backoffice/components/edit-art
 import { EditArtifactComponent } from './components/backoffice/components/edit-artifact/edit-artifact.component';
 import { NewVisitComponent } from './components/backoffice/components/new-visit/new-visit.component';
 import { EditVisitComponent } from './components/backoffice/components/edit-visit/edit-visit.component';
+import { NewScheduleComponent } from './components/backoffice/components/new-schedule/new-schedule.component';
+import { EditScheduleComponent } from './components/backoffice/components/edit-schedule/edit-schedule.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,9 @@ import { EditVisitComponent } from './components/backoffice/components/edit-visi
     EditArtistComponent,
     EditArtifactComponent,
     NewVisitComponent,
-    EditVisitComponent
+    EditVisitComponent,
+    NewScheduleComponent,
+    EditScheduleComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,
@@ -89,7 +95,9 @@ import { EditVisitComponent } from './components/backoffice/components/edit-visi
     MatTabsModule,
     MatSnackBarModule,
     NgxMaskModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MenuComponent

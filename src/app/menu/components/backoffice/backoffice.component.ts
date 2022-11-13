@@ -1,6 +1,8 @@
+import { MuseumService } from 'src/app/services/museum.service';
 import { UserService } from 'src/app/auth/user/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Admin } from 'src/app/auth/user/user';
+import { Museum } from 'src/app/interfaces/museum';
 
 @Component({
   selector: 'app-backoffice',
@@ -12,9 +14,11 @@ export class BackofficeComponent implements OnInit {
   idUser!: number | undefined
   admin!: Admin | undefined
   museumName?: string
+  museum: Museum | undefined
   canLoad = false
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private museumService: MuseumService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +39,15 @@ export class BackofficeComponent implements OnInit {
     this.userService.getUser(this.idUser).subscribe({
         next: (res) => this.museumName = res.admin?.museumName,
         error: (error) => console.log(error.error),
-        complete: () => this.canLoad = true
+        complete: () => this.getMuseum()
+    })
+  }
+
+  getMuseum() {
+    this.museumService.getOneMuseumByName(this.museumName).subscribe({
+      next: (res) => this.museum = res,
+      error: (error) => console.log(error),
+      complete: () => this.canLoad = true
     })
   }
 }
