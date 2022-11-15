@@ -42,7 +42,7 @@ export class EditCommentDialogComponent implements OnInit {
     this.AddCommentService.getComment(this.data.id).subscribe({
       next: (res) => {
         this.editCommentForm.patchValue({
-          comment: res.commentary
+          comment: this.data.later ? "" : res.commentary
         })
         this.rating = res.rating
       },
@@ -69,7 +69,8 @@ export class EditCommentDialogComponent implements OnInit {
   submitEditedComment() {
     const comment: Comment = {
       commentary : this.editCommentForm.get("comment")?.value,
-      rating: this.rating
+      rating: this.rating,
+      later: false
     }
     this.AddCommentService.updateComment(this.data.id, comment).subscribe({
       next: (res) => console.log("O comentário foi editado: ", res),

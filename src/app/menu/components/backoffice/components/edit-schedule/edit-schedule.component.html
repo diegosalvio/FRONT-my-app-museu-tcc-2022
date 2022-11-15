@@ -2,6 +2,26 @@
   <p>
     <span>{{museum.name}}</span>
   </p>
+
+  <p>
+    <mat-form-field>
+      <mat-label>Selecione uma programação</mat-label>
+      <mat-select formControlName="id">
+        <mat-option *ngFor="let schedule of schedules$ | async" [value]="schedule._id">
+          {{schedule.title}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="titleError">Campo inválido</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <button mat-button (click)="getOneSchedule()">
+      Selecionar
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </p>
+
   <p>
     <mat-form-field>
       <mat-label>Título da programação</mat-label>
@@ -22,8 +42,8 @@
     <mat-form-field>
       <mat-label>Data da programação</mat-label>
       <mat-date-range-input [rangePicker]="dp">
-        <input matStartDate formControlName="startDate" >
-        <input matEndDate formControlName="endDate" >
+        <input matStartDate formControlName="startDate">
+        <input matEndDate formControlName="endDate">
       </mat-date-range-input>
       <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
       <mat-date-range-picker #dp></mat-date-range-picker>
@@ -39,6 +59,9 @@
     </mat-form-field>
   </p>
   <p>
-    <button mat-button (click)="editSchedule()" [disabled]="!formTouched">Submit</button>
+    <button mat-button (click)="editSchedule()" [disabled]="!canDisable">Submit</button>
+  </p>
+  <p>
+    <button mat-button (click)="deleteSchedule()" [disabled]="!canDisable" color="warn">Deletar</button>
   </p>
 </form>

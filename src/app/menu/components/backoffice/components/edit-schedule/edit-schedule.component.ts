@@ -1,3 +1,6 @@
+import { DialogComponent } from './../../../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ScheduleService } from 'src/app/services/schedule.service';
 import { Component, Input, OnInit } from '@angular/core';
@@ -14,25 +17,32 @@ export class EditScheduleComponent implements OnInit {
 
   @Input() museum: Museum | undefined
 
+  schedules$!: Observable<Schedule[]>
+
   editScheduleForm!: FormGroup
+
+  selectForm!: FormGroup
   disables = false
+  canDisable = false
 
   constructor(
     private fb: FormBuilder,
     private scheduleService: ScheduleService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.editScheduleForm = this.fb.group({
+      id: [""],
       title: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       description: ["", [Validators.required, Validators.minLength(3)]],
       startDate: ["", [Validators.required]],
       endDate: ["", [Validators.required]],
       image: ["", [Validators.required]]
     })
-    this.patchForm()
-    this.editScheduleForm.disable()
+    this.getSchedules()
+    this.setEnablesDisables()
   }
 
   editInput(control: string) {
@@ -45,14 +55,30 @@ export class EditScheduleComponent implements OnInit {
     this.editScheduleForm.get("endDate")?.enable()
   }
 
-  patchForm() {
-    this.editScheduleForm.patchValue({
-      title: this.museum?.schedule?.title,
-      description: this.museum?.schedule?.description,
-      startDate: this.museum?.schedule?.date?.startDate,
-      endDate: this.museum?.schedule?.date?.endDate,
-      image: this.museum?.schedule?.image
+  getSchedules() {
+    this.schedules$ = this.scheduleService.getSchedulesByMuseum(this.museum?._id)
+  }
+
+  getOneSchedule() {
+    this.scheduleService.getOneSchedule(this.editScheduleForm.get("id")?.value).subscribe({
+      next: (res) => {
+        console.log(res)
+        this.editScheduleForm.patchValue({
+          title: res.title,
+          description: res.description,
+          startDate: res.date.startDate,
+          endDate: res.date.endDate,
+          image: res.image
+        })
+      },
+      error: (error) => console.log(error),
+      complete: () => this.canDisable = true
     })
+  }
+
+  setEnablesDisables() {
+    this.editScheduleForm.disable()
+    this.editScheduleForm.get("id")?.enable()
   }
 
   editSchedule() {
@@ -66,7 +92,7 @@ export class EditScheduleComponent implements OnInit {
         },
         image: this.editScheduleForm.get("image")?.value
       }
-      this.scheduleService.toSchedule(this.museum?._id, updatedSchedule).subscribe({
+      this.scheduleService.updateSchedule(this.museum?._id, updatedSchedule).subscribe({
         next: (res) => console.log("Programação atualizada: ", res),
         error: (error) => this.snackbar.open(error.error),
         complete: () => this.snackbar.open("Programação atualizada com sucesso", "okay")
@@ -74,6 +100,29 @@ export class EditScheduleComponent implements OnInit {
       return
     }
     this.snackbar.open("Formulário inválido. Tente novamente", "okay")
+  }
+
+  deleteSchedule() {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: "ATENÇÃO",
+        body: "Tem certeza que deseja deletar a programação selecionada?",
+        action: "deletar"
+      }
+    }).afterClosed().subscribe(
+      (res) => {
+        if(res) {
+          this.scheduleService.deleteSchedule(this.editScheduleForm.get("id")?.value).subscribe({
+            next: (res) => console.log("Será deletado: ", res),
+            error: (error) => this.snackbar.open(error.error, "okay"),
+            complete: () => {
+              this.snackbar.open("Programação deletada com sucesso!", "okay")
+              window.location.reload()
+            }
+          })
+        }
+      }
+    )
   }
 
 
