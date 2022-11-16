@@ -9,6 +9,7 @@ import { FreeVisitationComponent } from './components/visit-component/visit-moda
 import { VisitModalComponent } from './components/visit-component/visit-modal/visit-modal.component';
 import { MenuComponent } from './menu.component';
 import { ViewCommentsComponent } from './components/view-comments/view-comments.component';
+import { ViewScheduleComponent } from './components/view-schedule/view-schedule.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
        {
         path: 'view-comments',
         component: ViewCommentsComponent
+       },
+       {
+        path: 'view-schedule',
+        component: ViewScheduleComponent
        }
       ]
    }

@@ -21,13 +21,13 @@
     </mat-card-header>
     <mat-divider inset></mat-divider>
     <mat-card-actions align="end">
-      <button mat-button>CONFERIR</button>
+      <button mat-button [routerLink]="['view-schedule']">CONFERIR</button>
     </mat-card-actions>
   </mat-card>
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar>
-        <mat-icon>description</mat-icon>
+        <mat-icon matBadge="!" matBadgeColor="warn" [matBadgeHidden]="!showBadge" (click)="laterComment()">description</mat-icon>
       </div>
       <mat-card-title>COMENTÁRIOS</mat-card-title>
     </mat-card-header>

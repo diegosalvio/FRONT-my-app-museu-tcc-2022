@@ -50,6 +50,7 @@ import { NewScheduleComponent } from './components/backoffice/components/new-sch
 import { EditScheduleComponent } from './components/backoffice/components/edit-schedule/edit-schedule.component';
 import { ViewCommentsComponent } from './components/view-comments/view-comments.component';
 import { EditCommentDialogComponent } from './components/view-comments/edit-comment-dialog/edit-comment-dialog.component';
+import { ViewScheduleComponent } from './components/view-schedule/view-schedule.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { EditCommentDialogComponent } from './components/view-comments/edit-comm
     NewScheduleComponent,
     EditScheduleComponent,
     ViewCommentsComponent,
-    EditCommentDialogComponent
+    EditCommentDialogComponent,
+    ViewScheduleComponent
   ],
   imports: [
     CommonModule, MenuRoutingModule,

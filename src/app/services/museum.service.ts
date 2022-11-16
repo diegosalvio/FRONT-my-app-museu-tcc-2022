@@ -5,8 +5,9 @@ import { map, Observable, pluck, tap, debounceTime } from 'rxjs';
 import { Artifact } from '../interfaces/artifact';
 import { Artist } from '../interfaces/artist';
 import { Museums, Museum } from '../interfaces/museum';
+import { environment } from 'src/environments/environment';
 
-const API_URL = "http://localhost:3001/api/v1/museum"
+const API_URL = environment.URL_MUSEUM
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class MuseumService {
   ) { }
 
   getAllMuseums(): Observable<Museums> {
-    const res = this.httpClient.get<Museums>(API_URL).pipe(
+    const res = this.httpClient.get<Museums>(`${API_URL}/museum`).pipe(
       map((resp => {
         this.museumModel = resp
         return resp
@@ -38,7 +39,7 @@ export class MuseumService {
   }
 
   getOneMuseumByName(name: string | undefined) {
-    return this.httpClient.get<Museum>(`${API_URL}/${name}`).pipe(
+    return this.httpClient.get<Museum>(`${API_URL}/museum/${name}`).pipe(
       tap(res => {
         console.log(res)
       })
@@ -46,7 +47,7 @@ export class MuseumService {
   }
 
   getAllArtifactsFromMuseum(idMuseum: string) {
-    const res = this.httpClient.get(`${API_URL}/${idMuseum}/artifacts`).pipe(
+    const res = this.httpClient.get(`${API_URL}/${idMuseum}/museum/artifacts`).pipe(
       map((resp => {
         this.artifactModel = resp
       })),
@@ -56,7 +57,7 @@ export class MuseumService {
   }
 
   getOneArtist(idArtist: string | undefined): Observable<Artist> {
-    return this.httpClient.get<Artist>(`${API_URL}/artist/${idArtist}`).pipe(
+    return this.httpClient.get<Artist>(`${API_URL}/museum/artist/${idArtist}`).pipe(
       map((resp => {
         this.artistModel = resp
         return resp
@@ -66,7 +67,7 @@ export class MuseumService {
   }
 
   getVisitation(idMuseum: string | undefined, type: string) {
-    return this.httpClient.get<Visitation>(`${API_URL}/visitation/${type}/${idMuseum}`).pipe(
+    return this.httpClient.get<Visitation>(`${API_URL}/museum/visitation/${type}/${idMuseum}`).pipe(
       map(resp => {
         this.visitationModel = resp.typeVisit
         this.artifactModel = resp.visitationList
@@ -75,22 +76,22 @@ export class MuseumService {
   }
 
   getOneArtifact(id: string): Observable<Artifact> {
-    return this.httpClient.get<Artifact>(`${API_URL}/artifact/${id}`).pipe(
+    return this.httpClient.get<Artifact>(`${API_URL}/museum/artifact/${id}`).pipe(
       tap(() => console.log)
     )
   }
 
   newMuseum(museum: Museum) {
-    return this.httpClient.post<Museum>(`${API_URL}/register`, museum).pipe(
+    return this.httpClient.post<Museum>(`${API_URL}/museum/register`, museum).pipe(
       tap((res) => console.log("Museu criado: ", res))
     )
   }
 
   updateMuseum(id: string | undefined, museum: Museum) {
-    return this.httpClient.patch(`${API_URL}/update/${id}`, museum)
+    return this.httpClient.patch(`${API_URL}/museum/update/${id}`, museum)
   }
 
   deleteMuseum(id?: string): Observable<Museum> {
-    return this.httpClient.delete<Museum>(`${API_URL}/delete/${id}`)
+    return this.httpClient.delete<Museum>(`${API_URL}/museum/delete/${id}`)
   }
 }

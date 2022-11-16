@@ -36,7 +36,7 @@ export class NewScheduleComponent implements OnInit {
   }
 
   submitSchedule() {
-    if(this.scheduleForm.valid) {
+    if (this.scheduleForm.valid) {
       const schedule: Schedule = {
         title: this.scheduleForm.get("title")?.value,
         description: this.scheduleForm.get("description")?.value,
@@ -46,7 +46,7 @@ export class NewScheduleComponent implements OnInit {
         },
         image: this.scheduleForm.get("image")?.value
       }
-      this.scheduleService.toSchedule(this.museum?._id, schedule).subscribe({
+      this.scheduleService.newSchedule(this.museum?._id, schedule).subscribe({
         next: (res) => console.log("A programação foi cadastrada: ", res),
         error: (error) => this.snackbar.open(error.error, "okay"),
         complete: () => this.snackbar.open("Programação cadastrada com sucesso", "okay")

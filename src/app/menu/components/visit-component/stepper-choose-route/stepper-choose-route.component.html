@@ -48,7 +48,15 @@
     </p>
     <div>
       <button mat-button matStepperPrevious>Voltar</button>
-      <button mat-button (click)="doneMuseumRoute()">Começar</button>
+      <button mat-button (click)="doneMuseumRoute()">
+        <span *ngIf="!loadButton; else loader">
+          Começar
+        </span>
+      </button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
+
+<ng-template #loader>
+  <mat-spinner diameter="20"></mat-spinner>
+</ng-template>

@@ -42,6 +42,8 @@ export class StepperChooseRouteComponent implements OnInit {
   initialMuseum: string = ''
   initialRoute!: number
 
+  loadButton = false
+
   arraytest = [{}]
 
   constructor(
@@ -62,24 +64,30 @@ export class StepperChooseRouteComponent implements OnInit {
   getPersonalizedRoute(idMuseum: string, route: string) {
     console.log("ROUTE: ", route)
 
-    this.museumService.getVisitation(idMuseum, route.toLowerCase()).subscribe(res => console.log(res))
+    this.museumService.getVisitation(idMuseum, route.toLowerCase()).subscribe({
+      next: (res) => console.log(res),
+      error: (error) => console.log(error),
+      complete: () => this.router.navigate(['menu/visit-modal'])
+    })
   }
 
   doneMuseumRoute() {
     const choosenMuseum = this.museumForm.value.museum._id
     const choosenRoute = this.routesForm.value.route
+    this.loadButton = true
 
     if (this.museumForm.valid && this.routesForm.valid && this.routesForm.value.route !== "Livre") {
 
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
       this.museumService.index = 0
-      this.router.navigate(['menu/visit-modal'])
     } else if (this.routesForm.value.route === "Livre") {
       console.log("Caiu no else if?")
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
       this.router.navigate(["menu/visit-modal/free-visitation"])
     } else {
       console.log("Formulário Inválido")
+      this.loadButton = false
+
     }
   }
 
