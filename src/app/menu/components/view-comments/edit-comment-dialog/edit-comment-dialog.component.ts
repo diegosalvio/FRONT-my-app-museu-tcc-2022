@@ -75,7 +75,10 @@ export class EditCommentDialogComponent implements OnInit {
     this.AddCommentService.updateComment(this.data.id, comment).subscribe({
       next: (res) => console.log("O comentário foi editado: ", res),
       error: (error) => this.snackbar.open(error.error, "okay"),
-      complete: () => this.snackbar.open("Seu comentário foi editado", "okay")
+      complete: () => {
+        window.location.reload()
+        this.snackbar.open("Seu comentário foi editado", "okay")
+      }
     })
   }
 }

@@ -54,7 +54,7 @@ export class UserService {
   }
 
   getUser(id: number | undefined): Observable<UserInfo> {
-   return this.http.get<UserInfo>(`${url}/person/${id}`)
+    return this.http.get<UserInfo>(`${url}/person/${id}`)
   }
 
   updateUser(id: number | undefined, editedUser: EditedUser) {
@@ -64,5 +64,10 @@ export class UserService {
 
   deleteUser(id: number | undefined) {
     return this.http.delete(`${url}/person/delete/${id}`)
+  }
+
+  recoverPassword(id: number | undefined, newPwd: any) {
+    const object = {password: newPwd}
+    return this.http.patch(`${url}/person/recover-password/${id}`, object)
   }
 }
