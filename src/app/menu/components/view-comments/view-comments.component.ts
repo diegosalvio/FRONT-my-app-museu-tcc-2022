@@ -44,7 +44,7 @@ export class ViewCommentsComponent implements OnInit {
       data: {
         id: id
       }
-    }).afterClosed().subscribe(() => window.location.reload())
+    })
   }
 
   deleteComment(id: string | undefined) {

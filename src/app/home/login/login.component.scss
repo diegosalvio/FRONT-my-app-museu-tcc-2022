@@ -5,26 +5,28 @@
 }
 
 .div-img {
-  position: absolute;
-  margin-top: 30%;
-  left: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  @media(max-width: 767px) {
-    margin-top: 15%;
-    left: 30%;
-    top: 0;
+  .img-login {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    width: 180px
   }
-  }
+}
 
 .form-login {
   position: absolute;
-  top: 50%;
+  top: 58%;
   left: 50%;
   bottom: 50%;
   transform: translate(-50%, -50%);
 }
 
-.form-field-email, .button-login, .form-field-pwd {
+.form-field-email,
+.button-login,
+.form-field-pwd {
   width: 100%;
 }
 
@@ -33,9 +35,7 @@
   width: 100%;
   bottom: 8vw;
 
-
-
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     bottom: -30vw;
   }
 }
@@ -51,7 +51,5 @@ mat-divider {
 
 .button-register {
   width: 100%;
-  background-color: rgb(60,179,113)
+  background-color: rgb(60, 179, 113);
 }
-
-
