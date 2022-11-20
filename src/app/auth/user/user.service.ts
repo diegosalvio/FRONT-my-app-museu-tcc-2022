@@ -67,7 +67,12 @@ export class UserService {
   }
 
   recoverPassword(id: number | undefined, newPwd: any) {
-    const object = {password: newPwd}
+    const object = { password: newPwd }
     return this.http.patch(`${url}/person/recover-password/${id}`, object)
+  }
+
+  sendEmail(email: string) {
+    const object = { to: email }
+    return this.http.post(`${url}/person/forgot-password`, object)
   }
 }
