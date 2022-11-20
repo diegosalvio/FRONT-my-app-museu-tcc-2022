@@ -103,6 +103,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/FRONT-my-app-museu-tcc-2022/",
+            "name": "Diego Salvio",
+            "email": "diego.salvio@fatec.sp.gov.br"
+          }
         }
       }
     }
