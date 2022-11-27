@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
     this.editUserForm = this.formBuilder.group({
       name: [{value: "", disabled: true}, [Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z_ ]*$')]],
       phone: [{value: "", disabled: true}, [Validators.required, Validators.minLength(11), Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],
-      email: [{value: "", disabled: true}, [Validators.email]]
+      email: [{value: "", disabled: true}, [Validators.email, Validators.required]]
     })
     this.getUser()
   }

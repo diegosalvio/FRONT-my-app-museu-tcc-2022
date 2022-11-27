@@ -45,7 +45,7 @@ export class NewVisitComponent implements OnInit {
   ngOnInit(): void {
     this.visitForm = this.fb.group({
       type: ["", [Validators.required]],
-      artifacts: this.fb.array([])
+      artifacts: this.fb.array([]),
     })
     this.getMuseum()
   }
@@ -69,7 +69,7 @@ export class NewVisitComponent implements OnInit {
       }
     }).afterClosed().subscribe(
       (res) => {
-        if(res) {
+        if (res) {
           this.artifactControl.removeAt(index)
         }
       }
@@ -82,7 +82,6 @@ export class NewVisitComponent implements OnInit {
         this.idMuseum = res._id
       },
       error: (error) => {
-        console.log(error)
         this.snackbar.open(error, "fechar")
       },
       complete: () => {
@@ -97,15 +96,15 @@ export class NewVisitComponent implements OnInit {
 
   getArtifactList() {
     const arr = this.visitForm.get("artifacts")?.value
-    const newArr = arr.map((value: any)=> {
+    const newArr = arr.map((value: any) => {
       return value.idArtifact
     })
-    const unique = newArr.filter((value: string, index: number, array:[string]) => array.indexOf(value) !== index)
-    if(unique.length > 0) {
+    const unique = newArr.filter((value: string, index: number, array: [string]) => array.indexOf(value) !== index)
+    if (unique.length > 0) {
       this.canSubmit = false
       this.snackbar.open("Não repita itens na lista", "okay")
       newArr.length = 0
-    } else{
+    } else {
       this.canSubmit = true
     }
 
@@ -114,22 +113,16 @@ export class NewVisitComponent implements OnInit {
 
   submitVisitation() {
     this.getArtifactList()
-    if(this.visitForm.valid && this.canSubmit) {
+    if (this.visitForm.valid && this.canSubmit && this.list.length) {
       const visitation: NewVisitation = {
         type: this.visitForm.get("type")?.value.toLowerCase(),
         artifactList: this.list
       }
       this.visitService.newVisit(this.idMuseum, visitation).subscribe({
-        next: (res) => {
-          console.log("A seguinte rota foi adicionada: ",res)
-        },
-        error: (error) => {
-          this.snackbar.open(error, "okay")
-        },
-        complete: () => {
-          this.snackbar.open("Rota cadastrada com sucesso!", "fechar")
-        }
+        next: (res) => console.log("A seguinte rota foi adicionada: ", res),
+        error: (error) => this.snackbar.open(error.error.error, "okay"),
+        complete: () => this.snackbar.open("Rota cadastrada com sucesso!", "fechar")
       })
-    }
+    } else this.snackbar.open("Formulário inválido", "okay")
   }
 }

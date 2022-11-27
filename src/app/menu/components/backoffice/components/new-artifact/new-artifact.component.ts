@@ -86,8 +86,8 @@ export class NewArtifactComponent implements OnInit {
   submitArtifact() {
     console.log(this.artifactForm.getRawValue())
 
-    if(this.artifactForm.valid && this.idMuseum != undefined) {
-      const artist: Artist = this.artifactForm.get("artist")?.value
+    if (this.artifactForm.valid && this.idMuseum != undefined) {
+      const { _id } = this.artifactForm.get("artist")?.value
       const newArtifact: Artifact = {
         title: this.artifactForm.get("title")?.value,
         date: this.artifactForm.get("date")?.value,
@@ -97,7 +97,7 @@ export class NewArtifactComponent implements OnInit {
           lat: this.artifactForm.get("lat")?.value,
           lng: this.artifactForm.get("lng")?.value
         },
-        artist: artist._id ?? "",
+        artist: _id,
         museum: this.idMuseum ?? ""
       }
 
@@ -106,7 +106,7 @@ export class NewArtifactComponent implements OnInit {
           console.log("A seguinte obra foi cadastrada: ", res)
         },
         error: (error) => {
-          this.openSnackBar(error, "X")
+          this.openSnackBar(error.error.message, "X")
         },
         complete: () => {
           this.openSnackBar("Obra cadastrada com sucesso", "X")

@@ -1,9 +1,8 @@
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Artifact } from 'src/app/interfaces/artifact';
 import { ArtifactService } from 'src/app/services/artifact.service';
 import { DialogComponent } from '../../../dialog/dialog.component';
@@ -25,7 +24,7 @@ export class EditArtifactComponent implements OnInit {
     private fb: FormBuilder,
     private artifactService: ArtifactService,
     private snackbar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {

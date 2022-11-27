@@ -32,12 +32,14 @@
   </p>
   <p>
     <mat-form-field appearance="standard">
+      <mat-label>Latitude</mat-label>
       <input matInput placeholder="Latitude da obra" formControlName="lat">
       <mat-error *ngIf="latError">Campo inválido</mat-error>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="standard">
+      <mat-label>Longitude</mat-label>
       <input matInput placeholder="Longitude da obra" formControlName="lng">
       <mat-error *ngIf="lngError">Campo inválido</mat-error>
     </mat-form-field>
@@ -46,7 +48,6 @@
     <mat-form-field appearance="standard">
       <mat-label>Artista</mat-label>
       <input placeholder="Selecione o artista responsável" matInput formControlName="artist" [matAutocomplete]="auto">
-      <!-- <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedclient($event)"  [displayWith]="displayProperty"> -->
       <mat-error *ngIf="artistError">Campo inválido</mat-error>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedArtist($event)"
         [displayWith]="displayProperty">
@@ -57,6 +58,6 @@
     </mat-form-field>
   </p>
   <p>
-    <button mat-button>Cadastrar</button>
+    <button mat-button [disabled]="artifactForm.invalid">Cadastrar</button>
   </p>
 </form>

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { TokenInterceptorService } from './home/login/token-interceptor.service';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt)
 
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
@@ -35,7 +39,8 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  }],
+  },
+  { provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

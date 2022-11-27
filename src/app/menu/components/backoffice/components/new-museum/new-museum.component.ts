@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Museum } from './../../../../../interfaces/museum';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,7 +19,8 @@ export class NewMuseumComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private museumService: MuseumService
+    private museumService: MuseumService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -51,11 +53,19 @@ export class NewMuseumComponent implements OnInit {
           stateAddress:  this.museumForm.get("stateAddress")?.value,
           CEP: this.museumForm.get("CEP")?.value
         },
+        numberOfArtifacts: 10.000,
         description: this.museumForm.get("description")?.value
       }
       console.log(newMuseum)
       try {
-        this.museumService.newMuseum(newMuseum)
+        this.museumService.newMuseum(newMuseum).subscribe({
+          next: res => this.snackbar.open(`O museu ${res.name} está sendo criado...`, "okay"),
+          error: error => {
+            const message = error.error.message
+            this.snackbar.open(message, "okay")
+          },
+          complete: () => this.snackbar.open("Museu criado com sucesso", "okay")
+        })
       } catch (error) {
         console.log(error)
       }

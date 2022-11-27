@@ -9,14 +9,12 @@ import { catchError, debounceTime, map, Observable, of, tap } from 'rxjs';
 import { Artist } from 'src/app/interfaces/artist';
 import { environment } from 'src/environments/environment';
 import { DialogComponent } from '../../dialog/dialog.component';
-
 @Component({
   selector: 'app-visit-modal',
   templateUrl: './visit-modal.component.html',
   styleUrls: ['./visit-modal.component.scss']
 })
 export class VisitModalComponent implements OnInit, OnDestroy {
-
   museuInfo = this.museumService.museumModel
   artifactModel!: Artifact[]
   artistModel!: any
@@ -59,6 +57,8 @@ export class VisitModalComponent implements OnInit, OnDestroy {
     if (this.index < index) {
       this.index = this.index + 1
       this.museumService.index = this.index
+      this.getArtist()
+
     } else {
       this.dialog.open(DialogComponent, {
         data: {
@@ -79,6 +79,7 @@ export class VisitModalComponent implements OnInit, OnDestroy {
     if (this.index > 0) {
       this.index = this.index - 1
       this.museumService.index = this.index
+      this.getArtist()
     } else {
       console.log("Aparece um modal de opções para reiniciar ou fechar")
       this.dialog.open(DialogComponent, {
@@ -109,12 +110,7 @@ export class VisitModalComponent implements OnInit, OnDestroy {
   getArtist() {
     try {
       this.artist$ = this.museumService.getOneArtist(this.artifactModel[this.index].artist)
-      this.artist$.subscribe(
-        (resp) => {
-          this.artistName = resp.name
-          this.artistPortrait = resp.portrait
-        }
-      )
+      console.log(this.artifactModel[this.index].artist)
     } catch (error) {
       console.log(error)
       this.router.navigate(["menu/choose-museum"])
