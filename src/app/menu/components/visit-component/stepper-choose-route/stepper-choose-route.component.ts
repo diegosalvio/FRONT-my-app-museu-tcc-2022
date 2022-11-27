@@ -53,7 +53,6 @@ export class StepperChooseRouteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.initialRoute)
     this.museumForm = this._formBuilder.group({ museum: ['', Validators.required] });
     this.routesForm = this._formBuilder.group({ route: ['', Validators.required] });
 
@@ -62,8 +61,6 @@ export class StepperChooseRouteComponent implements OnInit {
   }
 
   getPersonalizedRoute(idMuseum: string, route: string) {
-    console.log("ROUTE: ", route)
-
     this.museumService.getVisitation(idMuseum, route.toLowerCase()).subscribe({
       next: (res) => console.log(res),
       error: (error) => console.log(error),
@@ -81,7 +78,6 @@ export class StepperChooseRouteComponent implements OnInit {
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
       this.museumService.index = 0
     } else if (this.routesForm.value.route === "Livre") {
-      console.log("Caiu no else if?")
       this.getPersonalizedRoute(choosenMuseum, choosenRoute)
       this.router.navigate(["menu/visit-modal/free-visitation"])
     } else {

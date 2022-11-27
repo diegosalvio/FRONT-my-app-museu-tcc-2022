@@ -25,6 +25,6 @@
     </div>
     </ng-container>
     <mat-icon (click)="add()">add</mat-icon>
-    <button mat-button color="accent" (click)="submitVisitation()" [disabled]="!visitForm.valid">Criar Visitação</button>
+    <button mat-button color="accent" (click)="submitVisitation()" [disabled]="visitForm.invalid && canSubmit">Criar Visitação</button>
 </form>
 

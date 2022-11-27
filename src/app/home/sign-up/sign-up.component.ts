@@ -65,9 +65,7 @@ export class SignUpComponent implements OnInit {
             console.log("Usuário Cadastrado")
             this.route.navigate([""])
           },
-          error: (error) => {
-            console.log("ERROR ADD NEW USER: ", error)
-          }
+          error: (error) => this.snackBar.open(error.error.message, "okay")
         }
       )
     }

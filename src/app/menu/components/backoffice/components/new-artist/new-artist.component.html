@@ -9,8 +9,10 @@
   <p>
     <mat-form-field appearance="standard">
       <mat-label>Data de nascimento</mat-label>
-      <input matInput placeholder="digite a data de nascimento do artista" formControlName="birthDate"
-        mask="00/00/0000">
+      <input matInput formControlName="birthDate" [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="birthDateError">Campo inválido</mat-error>
     </mat-form-field>
   </p>
@@ -29,6 +31,6 @@
     </mat-form-field>
   </p>
   <p>
-    <button mat-button>Cadastrar</button>
+    <button mat-button (click)="submitArtist" [disabled]="artistForm.invalid">Cadastrar</button>
   </p>
 </form>

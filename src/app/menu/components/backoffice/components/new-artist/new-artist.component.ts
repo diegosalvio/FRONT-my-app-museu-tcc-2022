@@ -32,7 +32,7 @@ export class NewArtistComponent implements OnInit {
     this.artistForm = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(3)]],
       birthDate: ["", [Validators.required]],
-      informationAbout: ["", [Validators.required, Validators.maxLength(500)]],
+      informationAbout: ["", [Validators.required, Validators.maxLength(5000)]],
       portrait: ["", [Validators.required]]
     })
   }
@@ -70,13 +70,8 @@ export class NewArtistComponent implements OnInit {
       console.log(newArtist)
       this.artistService.newArtist(newArtist).subscribe(
         {
-          complete: () => {
-            console.log("Artista Cadastrado")
-          },
-          error: (error) => {
-            const message = error
-            this.openSnackBar(message, "x")
-          }
+          complete: () => this.openSnackBar("Artista Cadastrado com sucesso!", "okay"),
+          error: error => this.openSnackBar(error.error.message, "okay")
         }
       )
     }

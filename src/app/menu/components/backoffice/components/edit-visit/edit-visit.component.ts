@@ -34,6 +34,7 @@ export class EditVisitComponent implements OnInit {
   list!: Array<string>
   visitationList!: Array<Artifact>
   showAddButton = false
+  visitationType: any
 
   constructor(
     private fb: FormBuilder,
@@ -71,7 +72,7 @@ export class EditVisitComponent implements OnInit {
       }
     }).afterClosed().subscribe(
       (res) => {
-        if(res) {
+        if (res) {
           this.artifactControl.removeAt(index)
         }
       }
@@ -89,8 +90,7 @@ export class EditVisitComponent implements OnInit {
         this.idMuseum = res._id
       },
       error: (error) => {
-        console.log(error)
-        this.snackbar.open(error.error, "fechar")
+        this.snackbar.open(error.error.message, "fechar")
       },
       complete: () => {
         this.getArtifacts()
@@ -104,15 +104,15 @@ export class EditVisitComponent implements OnInit {
 
   getArtifactList() {
     const arr = this.editVisitForm.get("artifacts")?.value
-    const newArr = arr.map((value: any)=> {
+    const newArr = arr.map((value: any) => {
       return value.idArtifact
     })
-    const unique = newArr.filter((value: string, index: number, array:[string]) => array.indexOf(value) !== index)
-    if(unique.length > 0) {
+    const unique = newArr.filter((value: string, index: number, array: [string]) => array.indexOf(value) !== index)
+    if (unique.length > 0) {
       this.canSubmit = false
       this.snackbar.open("Não repita itens na lista", "okay")
       newArr.length = 0
-    } else{
+    } else {
       this.canSubmit = true
     }
 
@@ -125,6 +125,7 @@ export class EditVisitComponent implements OnInit {
     this.visitService.getVisitationList(this.idMuseum, typeVisit).subscribe({
       next: (res) => {
         this.visitationList = res.visitationList
+        this.visitationType = res.typeVisit
       },
       error: (error) => {
         this.snackbar.open(error.error, "okay")
@@ -144,22 +145,17 @@ export class EditVisitComponent implements OnInit {
 
   submitEditedVisitation() {
     this.getArtifactList()
-    if(this.editVisitForm.valid && this.canSubmit){
+    if (this.editVisitForm.valid && this.canSubmit) {
       const editVisitation: NewVisitation = {
         type: this.editVisitForm.get("type")?.value.toLowerCase(),
         artifactList: this.list
       }
-      console.log(editVisitation)
-      this.visitService.updateVisit(this.idMuseum, editVisitation).subscribe({
-        next: (res) => {
-          console.log("Editando informações da visitação", res)
-        },
+      this.visitService.updateVisit(this.visitationType._id, editVisitation).subscribe({
+        next: (res) => this.snackbar.open(`Editando informações da visitação ${res}`, "okay"),
         error: (error) => {
-          this.snackbar.open(error.error, "okay")
+          this.snackbar.open(error.error.error, "okay")
         },
-        complete: () => {
-          this.snackbar.open("Informações editadas com sucesso", "okay")
-        }
+        complete: () => this.snackbar.open("Informações editadas com sucesso", "okay")
       })
     }
   }

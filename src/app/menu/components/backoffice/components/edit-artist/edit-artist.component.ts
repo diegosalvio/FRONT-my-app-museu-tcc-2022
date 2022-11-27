@@ -2,11 +2,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Injector, LOCALE_ID } from '@angular/core';
 import { MuseumService } from 'src/app/services/museum.service';
 import { Artist } from 'src/app/interfaces/artist';
 import { ArtistService } from 'src/app/services/artist.service';
 import { DialogComponent } from '../../../dialog/dialog.component';
+import { formatDate, FormatWidth, getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-edit-artist',
@@ -28,7 +29,8 @@ export class EditArtistComponent implements OnInit {
     private museumService: MuseumService,
     private artistService: ArtistService,
     private snackbar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private injector: Injector
   ) { }
 
   ngOnInit(): void {
@@ -61,9 +63,10 @@ export class EditArtistComponent implements OnInit {
     this.artistService.getArtist(idArtist).subscribe({
       next: (res) => {
         this.disablesDeleteButton = true
+        const date = formatDate(res.birthDate, getLocaleDateFormat(this.injector.get(LOCALE_ID), FormatWidth.Short), this.injector.get(LOCALE_ID))
         this.editArtistForm.patchValue({
           name: res.name,
-          birthDate: res.birthDate,
+          birthDate: date,
           informationAbout: res.informationAbout,
           portrait: res.portrait
         })

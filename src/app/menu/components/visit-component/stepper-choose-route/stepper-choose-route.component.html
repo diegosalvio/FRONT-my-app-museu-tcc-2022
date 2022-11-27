@@ -1,9 +1,4 @@
-<!-- <div class="example-input-wrapper">
-  <label for="duration">Animation duration:</label>
-  <input id="duration" value="2000" type="number" min="0" step="100" #duration>
-</div> -->
-
-<mat-vertical-stepper [linear]="false" #stepper [animationDuration]="'2000'">
+<mat-vertical-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="museumForm" errorMessage="Campo obrigatório!">
     <form [formGroup]="museumForm">
       <ng-template matStepLabel>Escolha um Museu</ng-template>

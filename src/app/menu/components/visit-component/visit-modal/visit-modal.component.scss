@@ -5,6 +5,33 @@ p {
   padding-right: 0px;
 }
 
-.all-content {
-  background-color: #D3D3D3;
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
 }
+
+mat-card {
+  height: 100%;
+}
+
+::ng-deep .mat-card-image {
+  height: 300px;
+}
+
+mat-card-content {
+  overflow: scroll;
+}
+
+.card-content-text {
+  height: 200px;
+  overflow: scroll;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+
