@@ -1,16 +1,18 @@
  .content-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
 }
 
 .register-div {
-  position: absolute;
+  /* position: absolute;s
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-
-
+  transform: translate(-50%, -50%); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 mat-form-field {
@@ -22,9 +24,9 @@ mat-form-field {
 }
 
 .title-label {
-  position: absolute;
+  //position: absolute;
   font-family: Roboto;
-  top: -7%;
+  //top: -7%;
   font-size: 22px;
   color: #3F51B5
 }

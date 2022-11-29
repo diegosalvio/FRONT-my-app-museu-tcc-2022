@@ -1,7 +1,8 @@
 .content-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100vw;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .div-img {
@@ -12,44 +13,28 @@
   .img-login {
     margin-top: 10px;
     margin-bottom: 30px;
-    width: 180px
+    width: 180px;
   }
 }
 
 .form-login {
-  position: absolute;
-  top: 58%;
-  left: 50%;
-  bottom: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.form-field-email,
-.button-login,
-.form-field-pwd {
-  width: 100%;
-}
-
-.div-button {
-  position: absolute;
-  width: 100%;
-  bottom: 8vw;
-
-  @media (max-width: 767px) {
-    bottom: -30vw;
-  }
-}
-
-mat-divider {
-  margin-bottom: 24px;
-}
-
-.button-pwd {
-  margin-top: 18px;
-  width: 100%;
+button {
+  width: 195px;
 }
 
 .button-register {
-  width: 100%;
   background-color: rgb(60, 179, 113);
+}
+
+mat-form-field {
+  width: 195px;
+  -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
 }

@@ -1,11 +1,11 @@
 <mat-stepper orientation="vertical">
   <form [formGroup]="viewScheduleForm">
     <mat-step>
-      <ng-template matStepLabel>Step 1</ng-template>
+      <ng-template matStepLabel>Escolha um museu</ng-template>
       <ng-template matStepContent>
         <p>
           <mat-form-field>
-            <mat-label>Selecione um museu</mat-label>
+            <mat-label>Museu</mat-label>
             <mat-select formControlName="museum">
               <mat-option *ngFor="let museum of museums$ | async" [value]="museum._id">
                 {{museum.name}}
@@ -13,15 +13,15 @@
             </mat-select>
           </mat-form-field>
         </p>
-        <button mat-button matStepperNext (click)="chooseMuseum()">Next</button>
+        <button mat-button matStepperNext (click)="chooseMuseum()">Próximo</button>
       </ng-template>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Step 2</ng-template>
+      <ng-template matStepLabel>Escolha uma programação</ng-template>
       <ng-template matStepContent>
         <p>
           <mat-form-field>
-            <mat-label>Escolha uma programação</mat-label>
+            <mat-label>Programação</mat-label>
             <mat-select formControlName="schedule">
               <mat-option *ngFor="let schedule of schedules$ | async" [value]="schedule">
                 {{schedule.title}}
@@ -29,12 +29,12 @@
             </mat-select>
           </mat-form-field>
         </p>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext (click)="showSchedule()">Next</button>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext (click)="showSchedule()">Próximo</button>
       </ng-template>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Step 3</ng-template>
+      <ng-template matStepLabel>Conferir</ng-template>
       <div class="card-schedule" *ngIf="canLoad; else loader">
         <h1>{{viewSchedule.title}}</h1>
         <p>
@@ -47,7 +47,7 @@
           {{viewSchedule.description}}
         </p>
       </div>
-      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperPrevious>Voltar</button>
     </mat-step>
   </form>
 </mat-stepper>
