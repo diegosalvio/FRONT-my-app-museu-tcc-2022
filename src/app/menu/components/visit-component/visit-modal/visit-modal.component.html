@@ -24,15 +24,15 @@
     </mat-expansion-panel>
   </mat-card-content>
   <!-- <mat-divider></mat-divider> -->
-  <mat-card-actions class="sticky-bottom">
-    <button mat-button (click)="previousOnTheList()">
+  <mat-card-actions class="position-bottom">
+    <button class="position-back" mat-button (click)="previousOnTheList()">
       VOLTAR
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+    <button mat-icon-button class="position-qr" aria-label="Example icon-button with share icon"
       [routerLink]="['free-visitation']">
       <mat-icon>qr_code</mat-icon>
     </button>
-    <button mat-button (click)="nextOnTheList()">
+    <button mat-button class="position-next" (click)="nextOnTheList()">
       PRÓXIMO
     </button>
   </mat-card-actions>

@@ -1,4 +1,3 @@
-
 p {
   text-align: justify;
   text-justify: inter-word;
@@ -35,3 +34,26 @@ mat-card-actions {
   align-self: flex-end;
 }
 
+.position-bottom {
+  position: fixed;
+  bottom: 0;
+}
+
+.position-next {
+  color: #5fc594;
+  position: relative;
+  left: 150px;
+  bottom: 10px;
+}
+
+.position-qr {
+  position: relative;
+  left: 85px;
+  bottom: 10px;
+}
+
+.position-back {
+  color: #F44336;
+  position: relative;
+  bottom: 10px;
+}
