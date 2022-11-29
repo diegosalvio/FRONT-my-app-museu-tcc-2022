@@ -1,7 +1,9 @@
 <div class="content-wrapper">
   <form [formGroup]="newUserForm" (submit)="signUp()">
     <div class="register-div">
-      <mat-label class="title-label">Registre-se!</mat-label>
+      <p>
+        <mat-label class="title-label">Registre-se!</mat-label>
+      </p>
       <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
         <input class="input-name" matInput formControlName="name">
@@ -57,8 +59,6 @@
       </mat-form-field>
 
       <button mat-raised-button class="register-button" color="primary">Cadastrar</button>
-
-      <br>
       <a [routerLink]="['']">Já se cadastrou? Clique aqui!</a>
     </div>
   </form>
