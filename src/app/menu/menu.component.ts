@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostBinding, Inject, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../auth/user/user.service';
@@ -13,7 +15,10 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private overlay: OverlayContainer,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2
   ) {
     const mapsScript = document.createElement('script')
     mapsScript.setAttribute('async', '');
@@ -24,6 +29,13 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.renderer.setAttribute(this.document.body, "class", "theme-light")
+  }
+
+  switchMode(isDarkMode: any) {
+    console.log(isDarkMode)
+    const hostClass = isDarkMode ? "theme-dark" : "theme-light"
+    this.renderer.setAttribute(this.document.body, "class", hostClass)
   }
 
   logout() {

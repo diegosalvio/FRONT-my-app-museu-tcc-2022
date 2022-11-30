@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, EventEmitter, HostBinding, OnInit, Output, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatMenuTrigger } from "@angular/material/menu";
 import { throwToolbarMixedModesError } from "@angular/material/toolbar";
@@ -8,6 +8,8 @@ import { UserService } from "src/app/auth/user/user.service";
 import { MuseumService } from "src/app/services/museum.service";
 import { DialogComponent } from "../dialog/dialog.component";
 import { DialogQrCodeComponent } from "../visit-component/dialog-qr-code/dialog-qr-code.component";
+import { FormControl } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,11 @@ import { DialogQrCodeComponent } from "../visit-component/dialog-qr-code/dialog-
 })
 export class HeaderComponent implements OnInit {
 
+  @Output() readonly darkModeSwitched = new EventEmitter<boolean>()
+
   canReturn: boolean = false
+
+  toggleControl = new FormControl(false);
 
   constructor(
     private userService: UserService,
@@ -39,7 +45,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['menu/choose-museum'])
   }
 
+  onDarkModeSwitched({ checked }: MatSlideToggleChange) {
+    this.darkModeSwitched.emit(checked)
+  }
+
   get showReturnButton() {
     return this.museumService.index && this.museumService.showReturn ? this.canReturn = true : this.canReturn = false
   }
+
 }

@@ -1,36 +1,42 @@
-  <mat-toolbar color="primary">
-    <button mat-icon-button [matMenuTriggerFor]="menuMuseus" class="example-icon">
-      <mat-icon>menu</mat-icon>
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menuMuseus" class="example-icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menuMuseus="matMenu" class="btn-group">
+    <button mat-menu-item>
+      <span [routerLink]="['/menu']">
+        Início
+      </span>
     </button>
-    <mat-menu #menuMuseus="matMenu" class="btn-group">
-      <button mat-menu-item>
-        <span [routerLink]="['/menu']">
-          Início
-        </span>
-      </button>
-      <button mat-menu-item color="accent">
-        <span>
-          Mais informações
-        </span>
-      </button>
-      <button mat-menu-item class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
-        <span>Sair</span>
-      </button>
-    </mat-menu>
-    <span>Minha Visita</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button matTooltip="Volte para sua visitação!" [routerLink]="['visit-modal']"
-      *ngIf="showReturnButton">
-      <mat-icon matTooltipPosition="below" matBadge="!" matBadgeColor="warn">
-        <!-- this.router.navigate(['menu/visit-modal']) -->
-        keyboard_return
-      </mat-icon>
+    <button mat-menu-item color="accent">
+      <span>
+        Mais informações
+      </span>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
-      [routerLink]="['edit-user']">
-      <mat-icon>account_circle</mat-icon>
+    <button mat-menu-item class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+      <span>Sair</span>
     </button>
-  </mat-toolbar>
+    <button class="theme-toggle" mat-menu-item (click)="$event.stopPropagation()">
+      <mat-icon>bedtime</mat-icon>
+      <mat-slide-toggle (change)="onDarkModeSwitched($event)" [formControl]="toggleControl"></mat-slide-toggle>
+      <mat-icon>brightness_5</mat-icon>
+    </button>
+
+  </mat-menu>
+  <span>Minha Visita</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button matTooltip="Volte para sua visitação!" [routerLink]="['visit-modal']"
+    *ngIf="showReturnButton">
+    <mat-icon matTooltipPosition="below" matBadge="!" matBadgeColor="warn">
+      <!-- this.router.navigate(['menu/visit-modal']) -->
+      keyboard_return
+    </mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon"
+    [routerLink]="['edit-user']">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
 
 
 <!-- (click)="openDialog('Visita Completa', 'A visita longa te dá a experiência completa da visitação!', 'close')"

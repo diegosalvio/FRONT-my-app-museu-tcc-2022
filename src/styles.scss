@@ -1,9 +1,9 @@
-/* @use "@angular/material" as mat;
+@use "@angular/material" as mat;
 
-@include mat.core(); */
+@include mat.core();
 
 // Define a dark theme
-/* $dark-theme: mat.define-dark-theme(
+$dark-theme: mat.define-dark-theme(
   (
     color: (
       primary: mat.define-palette(mat.$deep-purple-palette),
@@ -13,17 +13,17 @@
     typography: mat.define-typography-config(),
     density: 0,
   )
-); */
+);
 
 // Define a light theme
-/* $light-theme: mat.define-light-theme(
+$light-theme: mat.define-light-theme(
   (
     color: (
       primary: mat.define-palette(mat.$indigo-palette),
       accent: mat.define-palette(mat.$pink-palette),
     ),
   )
-); */
+);
 
 // Apply the dark theme by default
 /* @include mat.core-theme($dark-theme);
@@ -49,7 +49,14 @@ app-root,
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   //color: #e0e0e0;
-  //overflow: hidden;
+  overflow: hidden;
   height: 100%;
   box-sizing: border-box;
+}
+
+.theme-dark {
+  @include mat.all-component-themes($dark-theme);
+}
+.theme-light {
+  @include mat.all-component-themes($light-theme);
 }
