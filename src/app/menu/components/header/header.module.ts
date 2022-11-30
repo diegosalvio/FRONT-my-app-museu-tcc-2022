@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule,
     RouterModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule
   ],
   exports: [HeaderComponent]
 })

@@ -12,8 +12,19 @@
 
   .img-login {
     margin-top: 10px;
+    //margin-bottom: 30px;
+    width: 200px;
+  }
+
+  img {
+    mix-blend-mode: color-burn;
+  }
+
+  .logo-text{
+    font-size: 22px;
+    font-family: fantasy;
+    margin-top: 5px;
     margin-bottom: 30px;
-    width: 180px;
   }
 }
 

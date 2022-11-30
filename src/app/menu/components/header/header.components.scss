@@ -6,3 +6,16 @@ mat-toolbar {
   top: 0;
   z-index: 1
 }
+
+.theme-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+}
+
+::ng-deep .mat-menu-item .mat-icon {
+  margin-right: 0 !important;
+  vertical-align: middle !important;
+}
